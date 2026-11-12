@@ -41,3 +41,27 @@ describe('Discogs credits', () => {
     expect(releasePairs(comp)).toBeNull();
   });
 });
+
+describe('Discogs links file', () => {
+  it('round-trips pairs through the gzipped TSV', async () => {
+    const { PairTable, writeLinksFile, readLinksFile } = await import('../scripts/discogs.ts');
+    const { mkdtemp } = await import('node:fs/promises');
+    const { tmpdir } = await import('node:os');
+    const { join } = await import('node:path');
+    const t = new PairTable();
+    t.titles.push('Disappearance', 'Line\u2028break\there');
+    t.add(0, 1, 10, 0, 2013);
+    t.add(0, 1, 11, 0, 2014); // another album: weight 2
+    t.add(2, 1, 12, 1, 0);
+    const file = join(await mkdtemp(join(tmpdir(), 'links-')), 'links.tsv.gz');
+    await writeLinksFile(t, ['d100', 'd200', 'd300'], file, () => {});
+    // Read back with different artist numbers, and one artist unknown to this dump.
+    const back = await readLinksFile(file, new Map([['d100', 5], ['d200', 7]]), () => {});
+    expect(back.size).toBe(1);
+    expect([back.a[0], back.b[0], back.weight[0], back.year[0]]).toEqual([5, 7, 2, 2013]);
+    expect(back.titles[back.title[0]]).toBe('Disappearance');
+    const all = await readLinksFile(file, new Map([['d100', 0], ['d200', 1], ['d300', 2]]), () => {});
+    expect(all.size).toBe(2);
+    expect(all.titles[all.title[1]]).toBe('Line break here');
+  });
+});

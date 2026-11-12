@@ -6,8 +6,11 @@
 //   - main artists of the same release with each other (splits, "A & B", "A feat. B"), and
 //   - each main artist with everyone credited for playing/singing/writing/producing on it.
 // Only artists that MusicBrainz links to a Discogs page are kept (that's how the two are matched).
-import { createReadStream } from 'node:fs';
-import { createGunzip } from 'node:zlib';
+import { createReadStream, createWriteStream } from 'node:fs';
+import { createInterface } from 'node:readline';
+import { once } from 'node:events';
+import { finished } from 'node:stream/promises';
+import { createGunzip, createGzip } from 'node:zlib';
 
 /** Discogs placeholder artists ("Various", "Unknown Artist", "No Artist"…) never count. */
 const PLACEHOLDERS = new Set(['194', '355', '118760', '151641']);
@@ -78,6 +81,26 @@ export class PairTable {
       if (this.weight[i] < 65535) this.weight[i]++;
       this.lastMaster[i] = master;
     }
+  }
+
+  /** Records a pair with a known weight (from a links file). Repeats keep the larger weight. */
+  put(x: number, y: number, weight: number, titleRef: number, year: number) {
+    const [a, b] = x < y ? [x, y] : [y, x];
+    const key = a * 2097152 + b;
+    const bucket = this.buckets[key % 64];
+    const i = bucket.get(key);
+    if (i !== undefined) {
+      if (weight > this.weight[i]) this.weight[i] = Math.min(weight, 65535);
+      return;
+    }
+    if (this.size === this.a.length) this.grow();
+    const j = this.size++;
+    this.a[j] = a;
+    this.b[j] = b;
+    this.weight[j] = Math.min(weight, 65535);
+    this.year[j] = year;
+    this.title[j] = titleRef;
+    bucket.set(key, j);
   }
 
   has(x: number, y: number) {
@@ -197,4 +220,52 @@ export async function readDiscogsPairs(
   }
   log(`Discogs: ${releases.toLocaleString()} releases, ${used.toLocaleString()} with matched collaborators, ${table.size.toLocaleString()} pairs.`);
   return table;
+}
+
+// ---- Discogs links file ----
+// The releases dump is ~11 GB and Discogs refuses downloads from CI, so the pairs are extracted
+// once, locally, into a small gzipped TSV: `discogsA \t discogsB \t weight \t year \t title`.
+// Keyed by Discogs artist ids, so each build maps them through the *current* MusicBrainz dump.
+
+// Tabs and anything a line reader may treat as a line break (old titles contain U+2028).
+const clean = (s: string) => s.replace(/[\t\n\v\f\r\x85\u2028\u2029]+/g, ' ');
+
+/** Writes the pairs of `t` as a links file. `discogsOf[n]` is a Discogs id for artist number n. */
+export async function writeLinksFile(t: PairTable, discogsOf: string[], file: string, log: (msg: string) => void) {
+  const gz = createGzip({ level: 9 });
+  const out = gz.pipe(createWriteStream(file));
+  let chunk = '';
+  for (let i = 0; i < t.size; i++) {
+    chunk += `${discogsOf[t.a[i]]}\t${discogsOf[t.b[i]]}\t${t.weight[i]}\t${t.year[i] || ''}\t${clean(t.titles[t.title[i]] ?? '')}\n`;
+    if (chunk.length > 1 << 20) {
+      if (!gz.write(chunk)) await once(gz, 'drain');
+      chunk = '';
+    }
+  }
+  gz.end(chunk);
+  await finished(out);
+  log(`Discogs: wrote ${t.size.toLocaleString()} pairs to ${file}.`);
+}
+
+/** Reads a links file into a PairTable of our artist numbers (pairs with an unknown side are skipped). */
+export async function readLinksFile(file: string, toArtist: Map<string, number>, log: (msg: string) => void): Promise<PairTable> {
+  const t = new PairTable();
+  let lines = 0;
+  let lastTitle: string | undefined;
+  const lineReader = createInterface({ input: createReadStream(file).pipe(createGunzip()), crlfDelay: Infinity });
+  for await (const line of lineReader) {
+    if (!line) continue;
+    lines++;
+    const [x, y, weight, year, title = ''] = line.split('\t');
+    const a = toArtist.get(x);
+    const b = toArtist.get(y);
+    if (a === undefined || b === undefined || a === b) continue;
+    if (title !== lastTitle) {
+      t.titles.push(title); // pairs of one release are consecutive: one title string each
+      lastTitle = title;
+    }
+    t.put(a, b, Number(weight) || 1, t.titles.length - 1, Number(year) || 0);
+  }
+  log(`Discogs: ${lines.toLocaleString()} pairs in ${file}, ${t.size.toLocaleString()} between artists in this dump.`);
+  return t;
 }

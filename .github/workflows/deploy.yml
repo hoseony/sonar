@@ -1,8 +1,9 @@
 # Builds the explorer and publishes it to GitHub Pages.
 # One-time setup: repo Settings → Pages → Source: "GitHub Actions".
 #
-# The connection index (public/index/) is built from the latest MusicBrainz JSON dump and cached
-# per dump, so the ~1.8 GB download only happens when MusicBrainz publishes a new dump (twice a week).
+# The connection index (public/index/) is built from the latest MusicBrainz JSON dump plus the
+# Discogs links file (a release attachment, checked against data/discogs-links.sha256), and cached
+# per dump and links file, so the ~1.8 GB download only happens when MusicBrainz publishes a new dump.
 # The weekly schedule picks up new data even when nothing was pushed.
 name: Deploy to GitHub Pages
 
@@ -35,13 +36,14 @@ jobs:
       - run: npm ci
       - run: npm test
 
-      - name: Find latest MusicBrainz dump and Discogs month
+      - name: Find latest MusicBrainz dump and Discogs links
         id: dump
         run: |
           name=$(curl -fsS https://data.metabrainz.org/pub/musicbrainz/data/json-dumps/LATEST | tr -d '[:space:]')
           echo "name=$name" >> "$GITHUB_OUTPUT"
-          # Discogs publishes a releases dump on the 1st of each month.
-          echo "discogs=$(date -u +%Y%m)01" >> "$GITHUB_OUTPUT"
+          # The Discogs links file's expected hash is committed (data/discogs-links.sha256):
+          # a new links file means a new hash, so a new cache key and a rebuild.
+          echo "links=$(cut -c1-16 data/discogs-links.sha256)" >> "$GITHUB_OUTPUT"
 
       - name: Restore connection index
         id: index-cache
@@ -49,51 +51,36 @@ jobs:
         with:
           path: public/index
           # Bump the version when the index format or builder changes (src/shared/index-format.ts).
-          key: index-v4-${{ steps.dump.outputs.name }}-discogs-${{ steps.dump.outputs.discogs }}
+          key: index-v5-${{ steps.dump.outputs.name }}-${{ steps.dump.outputs.links }}
 
-      - name: Free disk space for the dumps (~13 GB)
-        if: steps.index-cache.outputs.cache-hit != 'true'
-        run: sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc /opt/hostedtoolcache/CodeQL && df -h /
-
-      - name: Build connection index from the dumps
-        id: build-index
+      - name: Build connection index
         if: steps.index-cache.outputs.cache-hit != 'true'
         env:
           DUMP_NAME: ${{ steps.dump.outputs.name }}
-          DISCOGS_MONTH: ${{ steps.dump.outputs.discogs }}
+          GH_TOKEN: ${{ github.token }}
         run: |
           mkdir -p .cache/dump
           base=https://data.metabrainz.org/pub/musicbrainz/data/json-dumps/$DUMP_NAME
           curl -fsSL -o .cache/dump/artist.tar.xz "$base/artist.tar.xz"
           curl -fsSL "$base/SHA256SUMS" | grep 'artist.tar.xz$' | sed 's#\*\?artist.tar.xz$#.cache/dump/artist.tar.xz#' | sha256sum -c -
 
-          # Discogs release credits (~11 GB): this month's dump, else last month's. Discogs sometimes
-          # rate-limits downloads; then the site is built from MusicBrainz alone (and not cached, so
-          # the next run tries again).
-          prev=$(date -u -d "$(date -u +%Y-%m-01) -1 month" +%Y%m)01
-          discogs=""
-          for d in "$DISCOGS_MONTH" "$prev"; do
-            f=".cache/dump/discogs_${d}_releases.xml.gz"
-            if curl -fsSL --retry 3 --retry-delay 120 -o "$f" "https://data.discogs.com/?download=data%2F${d:0:4}%2Fdiscogs_${d}_releases.xml.gz" && gzip -t "$f"; then
-              discogs="$f"; break
-            fi
-            rm -f "$f"
-          done
-          if [ -n "$discogs" ]; then
-            DISCOGS="$discogs" npm run build-index -- .cache/dump/artist.tar.xz
-            echo "with_discogs=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "::warning::Discogs dump unavailable; building from MusicBrainz only"
-            npm run build-index -- .cache/dump/artist.tar.xz
-          fi
-          rm -f .cache/dump/*.xz .cache/dump/*.gz
+          # Discogs credits come from a links file extracted locally from the Discogs dump (Discogs
+          # refuses downloads from CI) and attached to the "discogs-links" release. If it's missing
+          # or doesn't match the committed hash, stop: better the current site than one without it.
+          gh release download discogs-links --repo "$GITHUB_REPOSITORY" --pattern discogs-links.tsv.gz --dir .cache/dump \
+            || { echo "::error::No discogs-links.tsv.gz on the discogs-links release (see README)"; exit 1; }
+          (cd .cache/dump && sha256sum -c "$GITHUB_WORKSPACE/data/discogs-links.sha256") \
+            || { echo "::error::discogs-links.tsv.gz doesn't match data/discogs-links.sha256"; exit 1; }
+
+          DISCOGS=.cache/dump/discogs-links.tsv.gz npm run build-index -- .cache/dump/artist.tar.xz
+          rm -f .cache/dump/*
 
       - name: Save connection index
-        if: steps.build-index.outputs.with_discogs == 'true'
+        if: steps.index-cache.outputs.cache-hit != 'true'
         uses: actions/cache/save@v4
         with:
           path: public/index
-          key: index-v4-${{ steps.dump.outputs.name }}-discogs-${{ steps.dump.outputs.discogs }}
+          key: index-v5-${{ steps.dump.outputs.name }}-${{ steps.dump.outputs.links }}
 
       - run: npm run build
         env:

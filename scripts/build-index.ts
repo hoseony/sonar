@@ -27,11 +27,16 @@ import {
   type IndexMeta,
 } from '../src/shared/index-format.ts';
 import type { Edge } from '../src/shared/types.ts';
-import { type PairTable, readDiscogsPairs } from './discogs.ts';
+import { type PairTable, readDiscogsPairs, readLinksFile, writeLinksFile } from './discogs.ts';
 
 const archive = resolve(process.argv[2] ?? '.cache/dump/artist.tar.xz');
 /** Optional Discogs releases dump (discogs_YYYYMMDD_releases.xml.gz) for "worked together" credits. */
+/**
+ * DISCOGS: either the Discogs releases dump (discogs_*_releases.xml.gz) or a links file extracted
+ * from it (*.tsv.gz, see scripts/discogs.ts). DISCOGS_EXPORT: also write the links file here.
+ */
 const discogsFile = process.env.DISCOGS ? resolve(process.env.DISCOGS) : null;
+const discogsExport = process.env.DISCOGS_EXPORT ? resolve(process.env.DISCOGS_EXPORT) : null;
 /**
  * Every Discogs pair is kept by default. Optional trimming (0 = off): DISCOGS_PER_ARTIST keeps only
  * pairs among either side's top N collaborators (most shared releases); DISCOGS_MAX caps any
@@ -253,19 +258,24 @@ async function addDiscogs(records: Map<string, Rec>) {
   const ids: string[] = [];
   const num = new Map<string, number>();
   const toArtist = new Map<string, number>();
+  const discogsOf: string[] = [];
   for (const [dg, mb] of discogsToMb) {
     let n = num.get(mb);
     if (n === undefined) {
       n = ids.length;
       ids.push(mb);
       num.set(mb, n);
+      discogsOf[n] = dg;
     }
     toArtist.set(dg, n);
   }
   // Pair keys pack two artist numbers into one (a * 2^21 + b): stop loudly rather than mix pairs up.
   if (ids.length >= 2 ** 21) throw new Error(`Too many Discogs-linked artists for pair keys: ${ids.length}`);
   log(`Discogs: ${ids.length.toLocaleString()} MusicBrainz artists link to Discogs. Reading credits…`);
-  const t = await readDiscogsPairs(discogsFile, toArtist, log);
+  const t = discogsFile.endsWith('.tsv.gz')
+    ? await readLinksFile(discogsFile, toArtist, log)
+    : await readDiscogsPairs(discogsFile, toArtist, log);
+  if (discogsExport) await writeLinksFile(t, discogsOf, discogsExport, log);
 
   const keep = DISCOGS_PER_ARTIST === Infinity && DISCOGS_MAX === Infinity ? allPairs(t.size) : trimPairs(t);
   log(`Discogs: keeping ${keep.size.toLocaleString()} of ${t.size.toLocaleString()} pairs.`);

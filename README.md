@@ -17,12 +17,27 @@ The index lives under `public/index/` as gzipped JSON (the browser decompresses 
 - Artists missing from the index fall back to the live MusicBrainz API (about one request per second).
 
 ```bash
-# Build the index locally (~8 min; the dumps are ~1.8 GB + ~11 GB downloads, kept in .cache/, gitignored)
+# Build the index locally (~10 min). Dumps are kept in .cache/ (gitignored).
 curl -fL -o .cache/dump/artist.tar.xz https://data.metabrainz.org/pub/musicbrainz/data/json-dumps/<LATEST>/artist.tar.xz
-# Discogs monthly dump, e.g. discogs_20261101_releases.xml.gz from https://data.discogs.com/ (optional: omit DISCOGS for MusicBrainz only)
+# Discogs monthly dump (~11 GB), e.g. discogs_20261101_releases.xml.gz from https://data.discogs.com/
 DUMP_NAME=<LATEST> DISCOGS=.cache/dump/discogs_<YYYYMM01>_releases.xml.gz npm run build-index -- .cache/dump/artist.tar.xz
 ```
-The deploy workflow does this automatically. It caches the index per dump and Discogs month, rebuilds weekly, and builds from MusicBrainz alone if Discogs is unavailable. The index must stay under GitHub Pages' 1 GB site limit.
+
+**Deploying.** The deploy workflow builds the index weekly from the newest MusicBrainz dump. Discogs refuses downloads from GitHub's servers, so the workflow doesn't download the Discogs dump. It uses a small **Discogs links file** (`discogs-links.tsv.gz`, the extracted pairs) attached to a GitHub release. The file's SHA-256 is committed in `data/discogs-links.sha256`. If the file is missing or doesn't match, the workflow fails and the current site stays up.
+
+To refresh the Discogs data (e.g. every few months):
+1. Extract a new links file from a fresh Discogs dump:
+   ```bash
+   DUMP_NAME=<LATEST> DISCOGS=.cache/dump/discogs_<YYYYMM01>_releases.xml.gz DISCOGS_EXPORT=.cache/dump/discogs-links.tsv.gz npm run build-index -- .cache/dump/artist.tar.xz
+   ```
+2. Update the hash:
+   ```bash
+   (cd .cache/dump && shasum -a 256 discogs-links.tsv.gz) > data/discogs-links.sha256
+   ```
+3. Upload `discogs-links.tsv.gz` to the release tagged `discogs-links`, replacing the old file. Use the GitHub website, or `gh release upload discogs-links .cache/dump/discogs-links.tsv.gz --clobber`.
+4. Commit and push the new hash.
+
+The index (about 700 MB) must stay under GitHub Pages' 1 GB site limit.
 
 **Navigating:**
 - Two-finger swipe or scroll wheel pans; pinch or Ctrl/⌘ + scroll zooms; drag pans.
