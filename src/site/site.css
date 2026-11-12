@@ -231,7 +231,17 @@ body {
 .path .hop {
   color: var(--muted);
   font-size: 12px;
-  padding-left: 16px;
+  line-height: 1.45;
+  margin: 2px 0 2px 4px;
+  padding: 2px 0 2px 12px;
+  border-left: 2px solid var(--border, rgba(127, 127, 127, 0.3));
+}
+.path .hop strong {
+  color: var(--text);
+  font-weight: 600;
+}
+.path-summary {
+  margin: 8px 0 0;
 }
 .path button {
   border: 0;
@@ -831,4 +841,10 @@ kbd {
 }
 #panel .explore-here {
   margin: 6px 0 2px;
+}
+
+#panel .show-all {
+  display: block;
+  margin: 4px 0 12px 22px;
+  font-size: 12px;
 }

@@ -95,7 +95,9 @@ const collectives = new Set<string>();
 const prefs = loadPrefs();
 const physics = new Physics(graph, prefs);
 
-const nodeSize = (id: string) => (nodeById.get(id)?.kind === 'album' ? 3 : 4 + Math.sqrt(graph.degree(id)) * 2.2);
+/** Grows with connections, but slowly past 100: hubs (B.B. King has ~1,000) mustn't cover the map. */
+const degreeSize = (d: number) => 4 + Math.sqrt(Math.min(d, 100)) * 2.2 + (d > 100 ? 4 * Math.log2(d / 100) : 0);
+const nodeSize = (id: string) => (nodeById.get(id)?.kind === 'album' ? 3 : degreeSize(graph.degree(id)));
 
 function upsertNode(n: Omit<ExportNode, 'x' | 'y' | 'size'>, near?: { x: number; y: number }, i = 0, total = 1) {
   const prev = nodeById.get(n.id);
@@ -541,8 +543,8 @@ async function boot() {
   }
 
   /**
-   * The artist, then everyone connected to them (members / bands), then keeps growing outward
-   * level by level, stopping at a level boundary once the map is big (see AUTO_GROWTH_ARTISTS).
+   * A search: the artist, everyone connected to them (members / bands), and those people's own
+   * connections. Then it stops and offers "Explore one more level" (see AUTO_GROWTH_ARTISTS).
    */
   async function explore(id: string) {
     const token = ++exploreToken;
@@ -557,22 +559,43 @@ async function boot() {
     const growth = { done: false };
     followArtist(id, token, growth);
 
-    // Every connected artist, however big the group.
-    const queue = graph.neighbors(id).filter((n) => nodeById.get(n)?.kind !== 'album' && !expanded.has(n));
+    // Every connected artist: bands and members (MusicBrainz) first, then people they made records with.
+    const isCredit = (n: string) => graph.edges(id, n).every((e) => graph.getEdgeAttribute(e, 'type') === 'worked_with');
+    const neighbours = graph.neighbors(id).filter((n) => nodeById.get(n)?.kind !== 'album' && !expanded.has(n));
+    const queue = [...neighbours.filter((n) => !isCredit(n)), ...neighbours.filter(isCredit)];
     Object.assign(progress, { id, done: 0, total: queue.length });
     updateProgress();
-    void prefetch(queue); // index shards download in parallel
+    // Index shards download in parallel, a window ahead of the lookups: a big circle usually stops
+    // at the growth budget long before its end, so fetching all ~1,000 up front would be wasted.
+    const AHEAD = 48;
+    void prefetch(queue.slice(0, AHEAD));
 
-    for (const n of queue) {
+    // A small circle cascades in visibly (a short beat per artist). A big one (B.B. King has ~1,000
+    // connections, whose own connections would add ~17,000 artists) goes as fast as it can, in
+    // frame-sized slices, and stops at the growth budget: the rest waits for "one more level".
+    const cascade = queue.length <= 60;
+    let sliceStart = performance.now();
+    let stoppedAt = queue.length;
+    for (let i = 0; i < queue.length; i++) {
       if (token !== exploreToken) return; // user moved on to another artist
+      if (!cascade && artistsOnMap() >= AUTO_GROWTH_ARTISTS) {
+        stoppedAt = i;
+        break;
+      }
+      if (i && i % 16 === 0) void prefetch(queue.slice(i + AHEAD - 16, i + AHEAD));
       const t = performance.now();
-      await expand(n, { skipHuge: true });
+      await expand(queue[i], { skipHuge: true });
       if (token !== exploreToken) return; // moved on while that lookup ran
       progress.done++;
       updateProgress();
-      // Index hits are instant; a short beat lets members cascade in visibly.
-      const spent = performance.now() - t;
-      if (spent < 25) await new Promise((r) => setTimeout(r, 25 - spent));
+      if (cascade) {
+        // Index hits are instant; a short beat lets members cascade in visibly.
+        const spent = performance.now() - t;
+        if (spent < 25) await new Promise((r) => setTimeout(r, 25 - spent));
+      } else if (performance.now() - sliceStart > 16) {
+        await new Promise((r) => requestAnimationFrame(r));
+        sliceStart = performance.now();
+      }
     }
     if (token !== exploreToken) return;
     progress.id = null;
@@ -583,7 +606,13 @@ async function boot() {
     // Their members are in now: frame them (zoom), then keep following (pan only).
     if (stillHere()) fitNodes(oneHop(id), 800, 1.8, 1);
 
-    await growOutward(id, token, queue);
+    // Two rings (their connections, and those connections' own) and stop: further levels are a click
+    // away ("Explore one more level") instead of piling up on their own.
+    if (stoppedAt < queue.length) offerNextLevel(id, queue.slice(stoppedAt), 2, queue);
+    else {
+      const next = nextLevel(queue);
+      if (next.length) offerNextLevel(id, next, 3);
+    }
     // Physics must have every newcomer before we ask whether it's at rest.
     flushNow();
     growth.done = true;
@@ -594,6 +623,24 @@ async function boot() {
       // Final framing: centered, pulled back a little after a search so their scene shows around them.
       fitNodes(oneHop(id), 900, id === state.origin ? 1.6 : 1.4, 1, id);
     });
+  }
+
+  /** The panel's "Show connections": this artist's own connections only, then the usual offer. */
+  async function expandOne(id: string) {
+    const token = ++exploreToken;
+    activity.clear('deep');
+    if (!expanded.has(id)) activity.set('load', `Loading ${nodeById.get(id)?.label ?? 'artist'}…`);
+    await expand(id);
+    activity.clear('load');
+    if (token !== exploreToken || !expanded.has(id)) return;
+    if (state.selected === id) {
+      rerenderPanel();
+      if (!userCamera) fitNodes(oneHop(id), 700, 1.6, 1);
+    }
+    flushNow();
+    physics.onceAtRest(() => token === exploreToken && physics.lockIslands());
+    const next = nextLevel([id]);
+    if (next.length) offerNextLevel(id, next, 2);
   }
 
   /**
@@ -620,29 +667,15 @@ async function boot() {
   }
 
   /**
-   * Automatic growth goes level by level (level 1 = the artist's connections, 2 = theirs, …) and
-   * stops at the first level boundary after the map passes this many artists. From there,
-   * "Explore one more level" adds exactly one more level per click.
+   * A search grows two levels (the artist's connections, then theirs), stopping early inside a
+   * huge circle once the map has this many artists. "Explore one more level" adds one more per click.
    */
   const AUTO_GROWTH_ARTISTS = 1500;
   /** The next level waiting to be explored (shown as the button in the pill). */
-  let nextUp: { id: string; frontier: string[]; level: number } | null = null;
+  /** `base`: the whole level when `frontier` is only its unexplored rest (the next level grows from all of it). */
+  let nextUp: { id: string; frontier: string[]; level: number; base?: string[] } | null = null;
 
   const artistsOnMap = () => graph.filterNodes((n) => nodeById.get(n)?.kind !== 'album').length;
-
-  async function growOutward(id: string, token: number, lastLevel: string[], level = 3) {
-    nextUp = null;
-    let frontier = nextLevel(lastLevel);
-    while (frontier.length && token === exploreToken) {
-      // Only ever stop between levels, so the map always ends on a clean edge. A level whose
-      // lookups alone would take the map past the limit waits for you (the button) instead.
-      if (artistsOnMap() + frontier.length > AUTO_GROWTH_ARTISTS) return offerNextLevel(id, frontier, level);
-      if (!(await exploreLevel(frontier, level, token))) return;
-      frontier = nextLevel(frontier);
-      level++;
-    }
-    if (token === exploreToken) activity.clear('deep');
-  }
 
   /** Looks up everyone in one level. Returns false if you moved on to another artist meanwhile. */
   async function exploreLevel(frontier: string[], level: number, token: number): Promise<boolean> {
@@ -671,8 +704,8 @@ async function boot() {
   }
 
   /** Pauses at a level boundary and offers the next level as a button. */
-  function offerNextLevel(id: string, frontier: string[], level: number) {
-    nextUp = { id, frontier, level };
+  function offerNextLevel(id: string, frontier: string[], level: number, base?: string[]) {
+    nextUp = { id, frontier, level, base };
     activity.set('deep', `${artistsOnMap().toLocaleString()} artists on the map`, undefined, undefined, {
       label: `Explore one more level (+${frontier.length.toLocaleString()})`,
       onClick: exploreOneMoreLevel,
@@ -681,13 +714,13 @@ async function boot() {
 
   function exploreOneMoreLevel() {
     if (!nextUp) return;
-    const { id, frontier, level } = nextUp;
+    const { id, frontier, level, base } = nextUp;
     nextUp = null;
     const token = exploreToken;
     void (async () => {
       if (!(await exploreLevel(frontier, level, token))) return;
       if (!state.selected) return offerMapLevel(); // nothing selected: keep offering the whole map
-      const next = nextLevel(frontier);
+      const next = nextLevel(base ?? frontier);
       if (next.length) offerNextLevel(id, next, level + 1);
       else activity.set('deep', `Everything connected is on the map · ${artistsOnMap().toLocaleString()} artists`, undefined, undefined, {
         label: 'OK',
@@ -832,7 +865,7 @@ async function boot() {
     index,
     status: (id) => (loading.has(id) ? 'loading' : failed.has(id) ? 'error' : expanded.has(id) ? 'done' : 'idle'),
     progress: (id) => (progress.id === id ? progressText(id) : null),
-    expand: (id) => void explore(id),
+    expand: (id) => void expandOne(id),
     albums: fetchAlbums,
     count: connectionCount,
     inChainView: () => state.connectView,
@@ -866,7 +899,8 @@ async function boot() {
     // In the connection view a click just focuses that step: no growth, the camera and chain stay.
     const inChain = state.connectView;
     const move = inChain ? false : (opts.move ?? true);
-    const grow = inChain ? false : (opts.explore ?? true);
+    // Picking someone only focuses them; growing the map is always asked for (search, a link, a button).
+    const grow = inChain ? false : (opts.explore ?? false);
     const next = id && graph.hasNode(id) ? id : null;
     if (next !== state.selected) userCamera = false;
     state.selected = next;
@@ -912,7 +946,7 @@ async function boot() {
       scenes.schedule(); // scene islands come back
     }
     state.origin = id;
-    select(id);
+    select(id, { explore: true });
   }
 
   /** Focuses an artist that may not be on the map yet (search result, suggestion, shared link). */
@@ -922,7 +956,7 @@ async function boot() {
       upsertNode({ id: item.id, label: item.label, kind: item.kind });
       graphDirty = true; // select() below flushes it
     }
-    select(item.id, { push });
+    select(item.id, { push, explore: true });
   }
 
   // ---------- Panel collapse ----------
@@ -1150,7 +1184,8 @@ async function boot() {
 
   // ---------- Pointer ----------
 
-  renderer.on('clickNode', ({ node }) => select(node));
+  // A click focuses (highlight + panel) without moving the camera or growing the map.
+  renderer.on('clickNode', ({ node }) => select(node, { move: false }));
   renderer.on('clickStage', () => select(null));
   renderer.on('doubleClickNode', ({ node, preventSigmaDefault }) => {
     // Double-click zooms in on that artist's neighborhood instead of sigma's plain zoom.

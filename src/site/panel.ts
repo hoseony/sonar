@@ -1,7 +1,7 @@
 // Side panel for the selected node: details, connections, albums, and the path finder.
 import type Graph from 'graphology';
 import { h, years } from '../shared/dom.ts';
-import { EDGE_PHRASE, type Edge, type EdgeType, type ExportNode } from '../shared/types.ts';
+import type { Edge, EdgeType, ExportNode } from '../shared/types.ts';
 import type { AlbumInfo } from './live.ts';
 import { DISTANT_STEPS } from './connect.ts';
 import type { PathResult } from './path.ts';
@@ -48,15 +48,41 @@ const ROLES: Record<EdgeType, [string, string]> = {
 };
 const ROLE_ORDER = ['Members', 'Member of', 'Founders', 'Founded', 'Part of', 'Subgroups', 'Collaborators', 'Collaborations', 'Supporting musicians', 'Supported', 'Worked with', 'By'];
 
-const REVERSE_PHRASE: Record<EdgeType, string> = {
-  member_of: 'has member',
-  founded: 'was founded by',
-  subgroup_of: 'has subgroup',
-  collaborated: 'had collaborator',
-  supporting: 'was supported by',
-  worked_with: 'worked with',
-  released: 'is by',
-};
+/**
+ * One step of a connection chain as a sentence, e.g. "David Sylvian was a member of Japan
+ * (1974–1982), on vocals" or "Ichiko Aoba and Ryuichi Sakamoto worked together on «Disappearance»
+ * (2013)". Built from what the link already carries: years, instruments, the shared record.
+ */
+function stepSentence(ctx: PanelContext, e: Edge, from: string): Node {
+  const name = (id: string) => h('strong', null, ctx.node(id).label);
+  const [a, b] = [name(e.source), name(e.target)];
+  const when = years(e.begin, e.end);
+  // Working together has no direction: name them in the order the chain walks.
+  const [first, second] = e.source === from ? [a, b] : [b, a];
+  const extras = (e.attributes ?? []).filter((x) => x !== 'original');
+  const parts: (Node | string)[] = (() => {
+    switch (e.type) {
+      case 'member_of':
+        return [a, ' was a member of ', b, when && ` (${when})`, extras.length ? `, on ${extras.join(', ')}` : ''];
+      case 'founded':
+        return [a, ' founded ', b, when && ` (${when})`];
+      case 'subgroup_of':
+        return [a, ' is part of ', b];
+      case 'collaborated':
+        return [a, ' took part in ', b, when && ` (${when})`];
+      case 'supporting':
+        return [a, ' played with ', b, extras.length ? ` (${extras.join(', ')})` : '', when && `, ${when}`];
+      case 'worked_with': {
+        const record = extras[0];
+        // One record, one year (not "2013–").
+        return [first, ' and ', second, ' worked together', record ? [' on ', h('em', null, record)] : '', e.begin ? ` (${e.begin.slice(0, 4)})` : ''] as (Node | string)[];
+      }
+      case 'released':
+        return [b, ' is a record by ', a];
+    }
+  })();
+  return h('span', null, ...parts.flat().filter((x) => x !== '' && x !== undefined));
+}
 
 const coverUrl = (albumId: string) => `https://coverartarchive.org/release-group/${albumId}/front-250`;
 
@@ -114,7 +140,7 @@ function alsoLine(ctx: PanelContext, selected: string, other: ExportNode, max = 
 const counts = new Map<string, number | null>();
 function moreBadge(ctx: PanelContext, id: string) {
   if (ctx.status(id) === 'done') return null;
-  const badge = h('span', { class: 'more', title: 'Connections not on the map yet: click to explore' });
+  const badge = h('span', { class: 'more', title: 'Connections not on the map yet' });
   const fill = (total: number | null) => {
     const onMap = ctx.graph.hasNode(id) ? ctx.graph.degree(id) : 0;
     const more = total === null ? 0 : total - onMap;
@@ -122,13 +148,55 @@ function moreBadge(ctx: PanelContext, id: string) {
     else badge.remove();
   };
   if (counts.has(id)) fill(counts.get(id)!);
-  else
-    void ctx.count(id).then((n) => {
-      counts.set(id, n);
-      fill(n);
-    });
+  else {
+    // Counting needs that artist's index file: only for rows you can actually see (a hub's panel
+    // lists thousands of people, and fetching all their files made B.B. King download 10 MB).
+    badgeJobs.set(badge, () =>
+      void ctx.count(id).then((n) => {
+        counts.set(id, n);
+        fill(n);
+      }),
+    );
+    badgeObserver.observe(badge);
+  }
   return badge;
 }
+
+/**
+ * Growing the map is your call: picking an artist shows them, and this button adds their
+ * connections. It says how many first, so a 2,000-connection composer doesn't surprise you.
+ */
+function showConnections(ctx: PanelContext, id: string) {
+  const button = h('button', { class: 'primary explore-here', type: 'button', onclick: () => ctx.expand(id) }, 'Show connections');
+  const label = (total: number | null) => {
+    const onMap = ctx.graph.hasNode(id) ? ctx.graph.degree(id) : 0;
+    if (total === null) return;
+    const more = total - onMap;
+    button.textContent = more > 0 ? `Show ${more.toLocaleString()} more connection${more === 1 ? '' : 's'}` : 'Show connections';
+    if (total >= 150) button.title = 'That is a lot of artists: the map will get busy';
+  };
+  if (counts.has(id)) label(counts.get(id)!);
+  else void ctx.count(id).then((n) => (counts.set(id, n), label(n)));
+  return button;
+}
+
+const badgeJobs = new WeakMap<Element, () => void>();
+const badgeObserver = new IntersectionObserver(
+  (entries) => {
+    for (const e of entries) {
+      if (!e.isIntersecting) continue;
+      badgeObserver.unobserve(e.target);
+      badgeJobs.get(e.target)?.();
+      badgeJobs.delete(e.target);
+    }
+  },
+  { rootMargin: '200px' },
+);
+
+/** People shown per section before "Show all": hubs have thousands. */
+const ROWS_SHOWN = 60;
+/** Sections opened with "Show all", as `${artistId}:${role}` (kept across re-renders). */
+const shownAll = new Set<string>();
 
 export function renderPanel(panel: HTMLElement, ctx: PanelContext, id: string | null, path: PathResult | null) {
   if (!id) {
@@ -158,36 +226,49 @@ export function renderPanel(panel: HTMLElement, ctx: PanelContext, id: string | 
 
   const mbUrl = `https://musicbrainz.org/${n.kind === 'album' ? 'release-group' : 'artist'}/${n.id}`;
 
-  const sections = ROLE_ORDER.filter((r) => groups.has(r)).map((role) => {
-    const items = groups.get(role)!.sort((a, b) => (a.edge.begin ?? '9').localeCompare(b.edge.begin ?? '9'));
-    return [
-      h('h3', null, role),
+  const self = id;
+  const row = ({ other, edge }: { other: ExportNode; edge: Edge }) =>
+    h(
+      'li',
+      null,
       h(
-        'ul',
-        { class: 'people' },
-        items.map(({ other, edge }) =>
-          h(
-            'li',
-            null,
-            h(
-              'button',
-              {
-                onclick: () => ctx.select(other.id),
-                onmouseenter: () => ctx.peek(other.id),
-                onmouseleave: () => ctx.peek(null),
-                onfocus: () => ctx.peek(other.id),
-                onblur: () => ctx.peek(null),
-              },
-              h('span', { class: `dot ${other.kind}`, style: `background:${ctx.hue(other.id)}` }),
-              other.label,
-              moreBadge(ctx, other.id),
-              h('span', { class: 'sub' }, [years(edge.begin, edge.end), edge.attributes?.filter((a) => a !== 'original').join(', ')].filter(Boolean).join(' · ')),
-            ),
-            alsoLine(ctx, id, other),
-          ),
-        ),
+        'button',
+        {
+          onclick: () => ctx.select(other.id),
+          onmouseenter: () => ctx.peek(other.id),
+          onmouseleave: () => ctx.peek(null),
+          onfocus: () => ctx.peek(other.id),
+          onblur: () => ctx.peek(null),
+        },
+        h('span', { class: `dot ${other.kind}`, style: `background:${ctx.hue(other.id)}` }),
+        other.label,
+        moreBadge(ctx, other.id),
+        h('span', { class: 'sub' }, [years(edge.begin, edge.end), edge.attributes?.filter((a) => a !== 'original').join(', ')].filter(Boolean).join(' · ')),
       ),
-    ];
+      alsoLine(ctx, self, other),
+    );
+
+  const sections = ROLE_ORDER.filter((r) => groups.has(r)).map((role) => {
+    const all = groups.get(role)!.sort((a, b) => (a.edge.begin ?? '9').localeCompare(b.edge.begin ?? '9'));
+    const key = `${id}:${role}`;
+    const items = shownAll.has(key) ? all : all.slice(0, ROWS_SHOWN);
+    const more =
+      items.length < all.length
+        ? h(
+            'button',
+            {
+              class: 'linklike show-all',
+              onclick: (ev: Event) => {
+                shownAll.add(key);
+                const list = (ev.currentTarget as HTMLElement).previousElementSibling;
+                list?.append(...all.slice(ROWS_SHOWN).map(row));
+                (ev.currentTarget as HTMLElement).remove();
+              },
+            },
+            `Show all ${all.length.toLocaleString()}`,
+          )
+        : null;
+    return [h('h3', null, all.length > 1 ? `${role} · ${all.length.toLocaleString()}` : role), h('ul', { class: 'people' }, items.map(row)), more];
   });
 
   albums.sort((a, b) => (a.year ?? '9').localeCompare(b.year ?? '9'));
@@ -257,17 +338,18 @@ export function renderPanel(panel: HTMLElement, ctx: PanelContext, id: string | 
     path.nodes.forEach((nid, i) => {
       const node = ctx.node(nid);
       steps.push(h('li', null, h('span', { class: `dot ${node.kind}`, style: `background:${ctx.hue(node.id)}` }), h('button', { onclick: () => ctx.select(nid) }, node.label)));
-      if (i < path.edges.length) {
-        const e = ctx.edge(path.edges[i]);
-        const phrase = e.source === nid ? EDGE_PHRASE[e.type] : REVERSE_PHRASE[e.type];
-        steps.push(h('li', { class: 'hop' }, `↓ ${phrase}`));
-      }
+      if (i < path.edges.length) steps.push(h('li', { class: 'hop' }, stepSentence(ctx, ctx.edge(path.edges[i]), nid)));
     });
+    // "via Ryuichi Sakamoto and Japan": the artists in between, at a glance.
+    const between = path.nodes.slice(1, -1).map((nid) => ctx.node(nid).label);
+    const via = between.length
+      ? ` · via ${between.length <= 3 ? between.join(', ').replace(/, ([^,]*)$/, ' and $1') : `${between.slice(0, 2).join(', ')} and ${between.length - 2} more`}`
+      : ' · directly';
     pathOut.replaceChildren(
       h(
         'p',
-        { class: 'muted', style: 'margin:8px 0 0' },
-        `${path.edges.length} step${path.edges.length === 1 ? '' : 's'}`,
+        { class: 'muted path-summary' },
+        `${path.edges.length} step${path.edges.length === 1 ? '' : 's'}${via}`,
         // Long chains exist mostly because the data only has band memberships and collaborations:
         // say so, rather than presenting 17 steps as a close relationship.
         path.edges.length > DISTANT_STEPS ? ' · a distant connection' : '',
@@ -276,6 +358,7 @@ export function renderPanel(panel: HTMLElement, ctx: PanelContext, id: string | 
     );
   }
 
+  const chainFirst = ctx.inChainView() && !!path && path.nodes[0] === id && n.kind !== 'album';
   const trail = ctx.trail().filter((t) => t !== id).slice(-4);
   panel.replaceChildren(h('div', null,
     h(
@@ -310,13 +393,17 @@ export function renderPanel(panel: HTMLElement, ctx: PanelContext, id: string | 
     ),
     n.kind === 'album' ? cover(n.id, true) : null,
     // In the connection view nothing grows on its own: this is how you dig in from a step.
+    chainFirst ? [h('h3', null, 'How they are connected'), pathOut] : null,
     ctx.inChainView() && n.kind !== 'album'
       ? h('button', { class: 'primary explore-here', type: 'button', onclick: () => ctx.exploreFrom(id) }, 'Explore from here')
-      : statusLine,
+      : st === 'idle'
+        ? showConnections(ctx, id)
+        : statusLine,
     ctx.progress(id) ? h('p', { class: 'muted note progress' }, ctx.progress(id)) : null,
     sections,
     albumSection,
-    n.kind === 'album' ? null : [h('h3', null, 'How are they connected?'), h('div', { class: 'connect' }, connectInput, connectList), pathOut],
+    // In the connection view the chain is the point: it goes first (above). Otherwise it's a tool at the end.
+    n.kind === 'album' || chainFirst ? null : [h('h3', null, 'How are they connected?'), h('div', { class: 'connect' }, connectInput, connectList), pathOut],
   ));
   panel.hidden = false;
 }
