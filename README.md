@@ -9,7 +9,7 @@ An explorable map of musicians and the bands, projects and records that connect 
 
 Connections come from a **prebuilt index**, so even a 44-member band and every member's other bands load in about a second. The index combines two public data dumps:
 - [MusicBrainz](https://musicbrainz.org/doc/MusicBrainz_Database/Download) supplies band membership, collaborations and supporting musicians.
-- [Discogs](https://data.discogs.com/) release credits (CC0) add **"worked together"** links: featured artists, players, producers and writers credited on the same release. This covers what MusicBrainz misses, such as Ichiko Aoba × Ryuichi Sakamoto. Only musical credits count, never engineering, mastering or design. Each artist nominates its top 30 Discogs collaborators by shared releases. A link is kept if either side nominated it (`DISCOGS_PER_ARTIST`; `DISCOGS_MAX` optionally caps any artist's total). Artists are matched through the Discogs links on MusicBrainz.
+- [Discogs](https://data.discogs.com/) release credits (CC0) add **"worked together"** links: featured artists, players, producers and writers credited on the same release. This covers what MusicBrainz misses, such as Ichiko Aoba × Ryuichi Sakamoto. Only musical credits count, never engineering, mastering or design. Every Discogs collaboration is kept. Optional trimming: `DISCOGS_PER_ARTIST` keeps each artist's top N, and `DISCOGS_MAX` caps any artist's total. Artists are matched through the Discogs links on MusicBrainz.
 
 The index lives under `public/index/` as gzipped JSON (the browser decompresses it), split **by neighbourhood**: artists who played together share files.
 - Exploring a scene downloads a handful of small files, not hundreds.
@@ -88,3 +88,9 @@ npm run preview
 - `src/review/`: review page
 - `src/site/`: public explorer (sigma.js + graphology)
 - `src/shared/`: types and styles used by both
+
+## License
+
+Code: [MIT](LICENSE) © 2026 Hoseon Yu.
+
+Data from [MusicBrainz](https://musicbrainz.org) and [Discogs](https://www.discogs.com), both CC0. Thanks to both projects.
