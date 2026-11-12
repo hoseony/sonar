@@ -18,6 +18,10 @@ export interface PanelContext {
   /** Progress text while second-level connections load, else null */
   progress: (id: string) => string | null;
   expand: (id: string) => void;
+  /** Connections of this artist not looked up yet (their own connections would be added) */
+  unexplored: (id: string) => number;
+  /** Looks up all of them: one more level out from this artist */
+  exploreChildren: (id: string) => void;
   albums: (id: string) => Promise<AlbumInfo[]>;
   /** Total connections on record for an artist (null if unknown) */
   count: (id: string) => Promise<number | null>;
@@ -178,6 +182,21 @@ function showConnections(ctx: PanelContext, id: string) {
   if (counts.has(id)) label(counts.get(id)!);
   else void ctx.count(id).then((n) => (counts.set(id, n), label(n)));
   return button;
+}
+
+/** For an artist already explored: look up each of their connections too (one level further). */
+function exploreChildrenButton(ctx: PanelContext, id: string) {
+  const n = ctx.unexplored(id);
+  return h(
+    'button',
+    {
+      class: 'primary explore-here',
+      type: 'button',
+      title: n >= 150 ? 'That is a lot of artists: the map will get busy' : '',
+      onclick: () => ctx.exploreChildren(id),
+    },
+    `Explore their connections · ${n.toLocaleString()} artist${n === 1 ? '' : 's'}`,
+  );
 }
 
 const badgeJobs = new WeakMap<Element, () => void>();
@@ -398,7 +417,9 @@ export function renderPanel(panel: HTMLElement, ctx: PanelContext, id: string | 
       ? h('button', { class: 'primary explore-here', type: 'button', onclick: () => ctx.exploreFrom(id) }, 'Explore from here')
       : st === 'idle'
         ? showConnections(ctx, id)
-        : statusLine,
+        : st === 'done' && n.kind !== 'album' && ctx.unexplored(id) > 0 && !ctx.progress(id)
+          ? [statusLine, exploreChildrenButton(ctx, id)]
+          : statusLine,
     ctx.progress(id) ? h('p', { class: 'muted note progress' }, ctx.progress(id)) : null,
     sections,
     albumSection,

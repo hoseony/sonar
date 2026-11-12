@@ -4,7 +4,7 @@ import Graph from 'graphology';
 import Sigma from 'sigma';
 import { sdfCircle } from 'sigma/rendering';
 import { layerBorder } from '@sigma/node-border';
-import { h } from '../shared/dom.ts';
+import { h, years } from '../shared/dom.ts';
 import { EDGE_LABEL, type ArtistStub, type Edge, type EdgeType, type ExportData, type ExportNode } from '../shared/types.ts';
 import { activity } from './activity.ts';
 import { findConnection, MAX_STEPS, mountConnect } from './connect.ts';
@@ -379,6 +379,9 @@ async function boot() {
       };
       // A name hovered in the panel lights up on the map, whatever else is going on.
       if (key === state.peek) return look({ ...base, labelVisibility: 'visible', zIndex: 5, highlighted: true, size: (attrs.size as number) + 3 });
+      // The node under (or nearest to) the pointer: its label is drawn as a styled chip in the DOM
+      // (name, what it is, how many more) right where the label goes; see placeChip.
+      if (key === state.hovered && key !== state.origin) return look({ ...base, labelVisibility: 'hidden', zIndex: 5, highlighted: true });
       // Your starting point is always findable: a bright ring (text color: white on dark, near-black
       // on light) around its scene color, bigger, always labeled.
       // Its name sits on a solid pill so it reads against anything behind it.
@@ -625,6 +628,29 @@ async function boot() {
     });
   }
 
+  /** The panel's "Explore their connections": everyone connected to an explored artist gets looked up. */
+  let exploringChildrenOf: string | null = null;
+  async function exploreChildren(id: string) {
+    const frontier = nextLevel([id]);
+    if (!frontier.length) return;
+    const token = ++exploreToken;
+    nextUp = null;
+    exploringChildrenOf = id;
+    if (state.selected === id) rerenderPanel(); // the button goes away while it runs
+    const finished = await exploreLevel(frontier, 0, token);
+    if (exploringChildrenOf === id) exploringChildrenOf = null;
+    if (!finished) return;
+    activity.clear('deep');
+    if (state.selected === id) {
+      rerenderPanel();
+      if (!userCamera) fitNodes(twoHops(id), 800, 1.4, 1);
+    }
+    flushNow();
+    physics.onceAtRest(() => token === exploreToken && physics.lockIslands());
+    const next = nextLevel(frontier);
+    if (next.length) offerNextLevel(id, next, 0);
+  }
+
   /** The panel's "Show connections": this artist's own connections only, then the usual offer. */
   async function expandOne(id: string) {
     const token = ++exploreToken;
@@ -866,6 +892,8 @@ async function boot() {
     status: (id) => (loading.has(id) ? 'loading' : failed.has(id) ? 'error' : expanded.has(id) ? 'done' : 'idle'),
     progress: (id) => (progress.id === id ? progressText(id) : null),
     expand: (id) => void expandOne(id),
+    unexplored: (id) => (exploringChildrenOf === id ? 0 : nextLevel([id]).length),
+    exploreChildren: (id) => void exploreChildren(id),
     albums: fetchAlbums,
     count: connectionCount,
     inChainView: () => state.connectView,
@@ -1186,82 +1214,127 @@ async function boot() {
 
   // A click focuses (highlight + panel) without moving the camera or growing the map.
   renderer.on('clickNode', ({ node }) => select(node, { move: false }));
-  renderer.on('clickStage', () => select(null));
+  // A click in empty space picks the nearest artist if one is close (the one whose name is showing).
+  renderer.on('clickStage', () => (state.hovered ? select(state.hovered, { move: false }) : select(null)));
   renderer.on('doubleClickNode', ({ node, preventSigmaDefault }) => {
     // Double-click zooms in on that artist's neighborhood instead of sigma's plain zoom.
     preventSigmaDefault();
     takeCamera();
     fitNodes([node, ...graph.neighbors(node).filter(isNodeVisible)], 500);
   });
-  renderer.on('enterNode', ({ node }) => {
-    state.hovered = node;
-    container.style.cursor = 'pointer';
-    showCard(node);
-    if (!state.selected && !state.path) refresh();
-  });
-  renderer.on('leaveNode', () => {
-    state.hovered = null;
-    container.style.cursor = '';
-    hideCard();
-    if (!state.selected && !state.path) refresh();
-  });
-  renderer.on('nodeDragStart', hideCard);
-  camera.on('updated', () => {
-    if (state.hovered) placeCard(state.hovered);
-  });
+  // Hover chip: the hovered artist's label, richer than a map label can be.
+  const chip = h('div', { class: 'hover-chip', hidden: true });
+  container.after(chip);
+  /** Connection totals for the chip (null = unknown yet); filled in the background. */
+  const hoverCounts = new Map<string, number | null>();
 
-  // ---------- Hover card ----------
-  // Name, what it is, and whether there's more to load ("Click to explore · 14 connections").
-
-  const card = $<HTMLDivElement>('hovercard');
-  let cardFor: string | null = null;
-
-  function showCard(node: string) {
-    const n = nodeById.get(node);
+  function fillChip(id: string) {
+    const n = nodeById.get(id);
     if (!n) return;
-    cardFor = node;
-    const hue = hueOf(node, n.kind);
-    const meta = n.kind === 'album' ? ['album', n.year] : [n.kind === 'group' ? 'band' : 'person', n.disambiguation, n.country];
-    const line = h('div', { class: 'cta' });
-    card.replaceChildren(
-      h('div', { class: 'name' }, h('span', { class: `dot ${n.kind}`, style: `background:${hue}` }), n.label),
-      h('div', { class: 'meta' }, meta.filter(Boolean).join(' · ')),
-      line,
-    );
-    const onMap = graph.hasNode(node) ? graph.degree(node) : 0;
-    if (n.kind === 'album') line.textContent = 'Click for details';
-    else if (expanded.has(node)) line.textContent = `${onMap} connection${onMap === 1 ? '' : 's'} · click to focus`;
-    else if (loading.has(node)) line.textContent = 'Loading…';
-    else {
-      line.textContent = 'Click to explore';
-      void connectionCount(node).then((count) => {
-        if (cardFor !== node || count === null) return;
-        const more = Math.max(0, count - onMap);
-        if (count >= HUGE_GROUP) {
-          line.replaceChildren('Big collective · click to load all ', h('strong', null, more.toLocaleString()), ' members');
-          return;
-        }
-        line.replaceChildren('Click to explore · ', h('strong', null, `+${more}`), ` more connection${more === 1 ? '' : 's'}`);
-        if (count === 0) line.textContent = 'No other connections on record';
+    const meta =
+      n.kind === 'album' ? ['album', n.year] : [n.kind === 'group' ? 'band' : 'person', n.country, years(n.begin, n.end)];
+    const onMap = graph.hasNode(id) ? graph.degree(id) : 0;
+    if (n.kind !== 'album' && !hoverCounts.has(id)) {
+      hoverCounts.set(id, null);
+      void connectionCount(id).then((c) => {
+        hoverCounts.set(id, c);
+        if (state.hovered === id) fillChip(id);
       });
     }
-    placeCard(node);
-    card.hidden = false;
+    const total = hoverCounts.get(id);
+    const more = total != null ? total - onMap : 0;
+    chip.replaceChildren(
+      h('span', { class: 'dot', style: `background:${hueOf(id, n.kind)}` }),
+      h('span', { class: 'name' }, n.label),
+      h('span', { class: 'meta' }, meta.filter(Boolean).join(' · ')),
+      ...(more > 0 ? [h('span', { class: 'more' }, `+${more.toLocaleString()}`)] : []),
+    );
+    placeChip();
   }
 
-  function placeCard(node: string) {
-    if (!graph.hasNode(node)) return hideCard();
-    const p = renderer.graphToViewport(graph.getNodeAttributes(node) as { x: number; y: number });
-    const { width, height } = renderer.getDimensions();
-    const x = Math.min(p.x + 16, width - card.offsetWidth - 8);
-    const y = Math.min(Math.max(8, p.y - card.offsetHeight / 2), height - card.offsetHeight - 8);
-    card.style.transform = `translate(${Math.round(x)}px, ${Math.round(y)}px)`;
+  /** Puts the chip where the hovered node's label would be: just right of the node, centered on it. */
+  function placeChip() {
+    const id = state.hovered;
+    if (!id || !graph.hasNode(id) || id === state.origin) return void (chip.hidden = true);
+    const p = renderer.graphToViewport(graph.getNodeAttributes(id) as { x: number; y: number });
+    const ratio = camera.getState().ratio;
+    const radius = (renderer.getNodeDisplayData(id)?.size ?? 6) / (ratio < 1 ? 1 : Math.sqrt(ratio));
+    chip.hidden = false;
+    const { width } = renderer.getDimensions();
+    let x = p.x + radius + 6;
+    // Near the right edge, flip to the left of the node.
+    if (x + chip.offsetWidth > width - 8) x = p.x - radius - 6 - chip.offsetWidth;
+    chip.style.transform = `translate(${Math.round(x)}px, ${Math.round(p.y - chip.offsetHeight / 2)}px)`;
+  }
+  renderer.on('afterRender', placeChip); // follows the node as the map moves and settles
+
+  // Hover snaps to the nearest artist within SNAP_PX of the pointer, not only the one exactly under
+  // it: small dots are hard to hit, and you shouldn't have to aim to read a name.
+  const SNAP_PX = 24;
+  let exactHover: string | null = null;
+  let pointer: { x: number; y: number } | null = null;
+  let pointerDown = false;
+  let hoverFrame = 0;
+
+  function setHovered(node: string | null) {
+    if (node === state.hovered) return;
+    state.hovered = node;
+    container.style.cursor = node ? 'pointer' : '';
+    if (node) fillChip(node);
+    else chip.hidden = true;
+    refresh();
   }
 
-  function hideCard() {
-    cardFor = null;
-    card.hidden = true;
+  function nearestNode(): string | null {
+    if (!pointer) return null;
+    // Rendered radius: sizes are in screen pixels, shrunk when zoomed out (zoomToSizeRatioFunction).
+    const ratio = camera.getState().ratio;
+    const shrink = ratio < 1 ? 1 : Math.sqrt(ratio);
+    let best: string | null = null;
+    let bestGap = SNAP_PX;
+    graph.forEachNode((n, a) => {
+      if (!isNodeVisible(n)) return;
+      const d = renderer.getNodeDisplayData(n);
+      if (!d) return;
+      const p = renderer.graphToViewport(a as { x: number; y: number });
+      const gap = Math.hypot(p.x - pointer!.x, p.y - pointer!.y) - d.size / shrink;
+      if (gap < bestGap) {
+        bestGap = gap;
+        best = n;
+      }
+    });
+    return best;
   }
+
+  const scheduleHover = () => {
+    if (!hoverFrame) hoverFrame = requestAnimationFrame(() => {
+      hoverFrame = 0;
+      if (!pointerDown) setHovered(exactHover ?? nearestNode());
+    });
+  };
+  container.addEventListener('pointermove', (e) => {
+    const r = container.getBoundingClientRect();
+    pointer = { x: e.clientX - r.left, y: e.clientY - r.top };
+    scheduleHover();
+  });
+  container.addEventListener('pointerdown', () => (pointerDown = true));
+  window.addEventListener('pointerup', () => {
+    pointerDown = false;
+    scheduleHover();
+  });
+  container.addEventListener('pointerleave', () => {
+    pointer = null;
+    exactHover = null;
+    setHovered(null);
+  });
+  renderer.on('enterNode', ({ node }) => {
+    exactHover = node;
+    setHovered(node);
+  });
+  renderer.on('leaveNode', () => {
+    exactHover = null;
+    scheduleHover();
+  });
 
   // ---------- Search ----------
 
@@ -1434,7 +1507,6 @@ async function boot() {
     discardFlush();
     physics.clear();
     scenes.clear();
-    hideCard();
     activity.clearAll();
     nextUp = null;
     state.trail = [];
