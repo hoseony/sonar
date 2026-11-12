@@ -1,0 +1,119 @@
+:root {
+  --bg: #fbfaf7;
+  --surface: #ffffff;
+  --surface-2: #f2f0eb;
+  --text: #1d1c1a;
+  --muted: #6d6a64;
+  --border: #e3e0d9;
+  --accent: #b4532a;
+  --accent-text: #ffffff;
+  --person: #3b6ea8;
+  --group: #b4532a;
+  --album: #8f8b84;
+  --edge: #cfcbc3;
+  --faded: #e9e6e0;
+  --danger: #a33a3a;
+  --radius: 8px;
+  --font: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', 'Hiragino Sans', 'Apple SD Gothic Neo', sans-serif;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #141413;
+    --surface: #1d1c1a;
+    --surface-2: #262522;
+    --text: #ecebe7;
+    --muted: #9c988f;
+    --border: #34322e;
+    --accent: #e0835a;
+    --accent-text: #141413;
+    --person: #7aa7dc;
+    --group: #e0835a;
+    --album: #807c75;
+    --edge: #45423d;
+    --faded: #2a2926;
+    --danger: #e07a7a;
+    color-scheme: dark;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 14px/1.45 var(--font);
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+input[type='search'],
+input[type='text'] {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+input:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+button {
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 6px 12px;
+}
+
+button.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-text);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+a {
+  color: var(--accent);
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: 0;
+  flex: none;
+}
+.dot.person {
+  background: var(--person);
+}
+.dot.group {
+  background: var(--group);
+}
+.dot.album {
+  background: var(--album);
+  border-radius: 2px;
+}

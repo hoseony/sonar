@@ -1,0 +1,1281 @@
+{
+ "begin-area": {
+  "sort-name": "Canterbury",
+  "name": "Canterbury",
+  "disambiguation": "",
+  "id": "36ed2e86-4e30-49eb-8acb-96004ef98fa3",
+  "type-id": null,
+  "type": null
+ },
+ "gender": null,
+ "isnis": [
+  "0000000115037939"
+ ],
+ "disambiguation": "British rock band",
+ "area": {
+  "disambiguation": "",
+  "type-id": null,
+  "type": null,
+  "iso-3166-1-codes": [
+   "GB"
+  ],
+  "id": "8a754a16-0027-3a29-b6d7-2b40ea0481ed",
+  "name": "United Kingdom",
+  "sort-name": "United Kingdom"
+ },
+ "type": "Group",
+ "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+ "gender-id": null,
+ "ipis": [],
+ "life-span": {
+  "ended": false,
+  "begin": "1966-09",
+  "end": null
+ },
+ "end-area": null,
+ "id": "5193ce6b-a315-4c50-ae49-54e69ffbc988",
+ "country": "GB",
+ "relations": [
+  {
+   "source-credit": "",
+   "artist": {
+    "name": "Percy Jones",
+    "sort-name": "Jones, Percy",
+    "disambiguation": "",
+    "type": "Person",
+    "type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+    "id": "7fa3e2bc-19b3-420a-926c-ac3ada266c7b",
+    "country": "GB"
+   },
+   "target-credit": "",
+   "target-type": "artist",
+   "type-id": "ed6a7891-ce70-4e08-9839-1f2f62270497",
+   "type": "instrumental supporting musician",
+   "begin": "1976-09",
+   "end": "1976-12",
+   "attribute-values": {},
+   "direction": "backward",
+   "attributes": [
+    "bass"
+   ],
+   "ended": true,
+   "attribute-credits": {},
+   "attribute-ids": {
+    "bass": "6505f98c-f698-4406-8bf4-8ca43d05c36f"
+   }
+  },
+  {
+   "attribute-ids": {
+    "original": "4fd3b255-a7d7-4424-9a63-40fa543b601c"
+   },
+   "ended": true,
+   "direction": "backward",
+   "attributes": [
+    "original"
+   ],
+   "target-type": "artist",
+   "target-credit": "",
+   "type": "member of band",
+   "type-id": "5be4c609-9afa-4ea0-910b-12ffb71e3821",
+   "begin": "1966",
+   "attribute-values": {},
+   "end": "1967-08",
+   "artist": {
+    "name": "Daevid Allen",
+    "sort-name": "Allen, Daevid",
+    "disambiguation": "",
+    "type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+    "type": "Person",
+    "id": "77e112da-5529-44b9-b957-bec3c3105440",
+    "country": "AU"
+   },
+   "source-credit": ""
+  },
+  {
+   "direction": "backward",
+   "attributes": [
+    "original"
+   ],
+   "type-id": "5be4c609-9afa-4ea0-910b-12ffb71e3821",
+   "type": "member of band",
+   "target-credit": "",
+   "target-type": "artist",
+   "end": "1968-11",
+   "attribute-values": {},
+   "begin": "1966",
+   "artist": {
+    "disambiguation": "",
+    "type": "Person",
+    "type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+    "id": "ad4ba77a-2382-4367-b687-89d38c58e16d",
+    "country": "GB",
+    "name": "Kevin Ayers",
+    "sort-name": "Ayers, Kevin"
+   },
+   "source-credit": "",
+   "attribute-ids": {
+    "original": "4fd3b255-a7d7-4424-9a63-40fa543b601c"
+   },
+   "ended": true
+  },
+  {
+   "direction": "backward",
+   "attributes": [
+    "original"
+   ],
+   "type": "member of band",
+   "type-id": "5be4c609-9afa-4ea0-910b-12ffb71e3821",
+   "target-credit": "",
+   "target-type": "artist",
+   "attribute-values": {},
+   "end": "1971-08",
+   "begin": "1966",
+   "artist": {
+    "country": "GB",
+    "id": "9f041c61-f382-4048-a1f1-33105124bb99",
+    "type": "Person",
+    "type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+    "disambiguation": "Canterbury scene",
+    "sort-name": "Wyatt, Robert",
+    "name": "Robert Wyatt"
+   },
+   "source-credit": "",
+   "attribute-ids": {
+    "original": "4fd3b255-a7d7-4424-9a63-40fa543b601c"
+   },
+   "ended": true
+  },
+  {
+   "artist": {
+    "sort-name": "Ratledge, Mike",
+    "name": "Mike Ratledge",
+    "country": "GB",
+    "id": "62819c02-faf5-44a6-a523-e00ce027a6f4",
+    "type": "Person",
+    "type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+    "disambiguation": ""
+   },
+   "source-credit": "",
+   "attributes": [
+    "original"
+   ],
+   "direction": "backward",
+   "begin": "1966",
+   "end": "1976-03",
+   "attribute-values": {},
+   "target-credit": "",
+   "target-type": "artist",
+   "type": "member of band",
+   "type-id": "5be4c609-9afa-4ea0-910b-12ffb71e3821",
+   "ended": true,
+   "attribute-ids": {
+    "original": "4fd3b255-a7d7-4424-9a63-40fa543b601c"
+   }
+  },
+  {
+   "ended": true,
+   "attribute-ids": {},
+   "artist": {
+    "id": "a3626f69-2434-4e51-819c-6d4751abc51d",
+    "country": "GB",
+    "type": "Person",
+    "type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+    "disambiguation": "British bassist",
+    "name": "Hugh Hopper",
+    "sort-name": "Hopper, Hugh"
+   },
+   "source-credit": "",
+   "direction": "backward",
+   "attributes": [],
+   "type-id": "5be4c609-9afa-4ea0-910b-12ffb71e3821",
+   "type": "member of band",
+   "target-type": "artist",
+   "target-credit": "",
+   "end": "1973-05",
+   "attribute-values": {},
+   "begin": "1968-12"
+  },
+  {
+   "source-credit": "",
+   "artist": {
+    "name": "Andy Summers",
+    "sort-name": "Summers, Andy",
+    "disambiguation": "",
+    "id": "7d81816f-200c-47d3-a71d-4421b3185d45",
+    "country": "GB",
+    "type": "Person",
+    "type-id": "b6e035f4-3ce9-331c-97df-83397230b0df"
+   },
+   "type-id": "5be4c609-9afa-4ea0-910b-12ffb71e3821",
+   "type": "member of band",
+   "target-credit": "",
+   "target-type": "artist",
+   "end": "1968",
+   "attribute-values": {},
+   "begin": "1968",
+   "direction": "backward",
+   "attributes": [],
+   "ended": true,
+   "attribute-ids": {}
+  },
+  {
+   "ended": true,
+   "attribute-ids": {},
+   "source-credit": "",
+   "artist": {
+    "disambiguation": "",
+    "type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+    "type": "Person",
+    "id": "6487a0a1-e0f6-42cd-90d8-c63af4fe9307",
+    "country": "DE",
+    "name": "Marc Charig",
+    "sort-name": "Charig, Marc"
+   },
+   "type-id": "5be4c609-9afa-4ea0-910b-12ffb71e3821",
+   "type": "member of band",
+   "target-credit": "",
+   "target-type": "artist",
+   "attribute-values": {},
+   "end": "1969-12",
+   "begin": "1969-10",
+   "direction": "backward",
+   "attributes": []
+  },
+  {
+   "type": "member of band",
+   "type-id": "5be4c609-9afa-4ea0-910b-12ffb71e3821",
+   "target-type": "artist",
+   "target-credit": "",
+   "attribute-values": {},
+   "end": "1969-12",
+   "begin": "1969-10",
+   "direction": "backward",
+   "attributes": [],
+   "source-credit": "",
+   "artist": {
+    "type": "Person",
+    "type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+    "id": "1d70134b-4307-4828-85c7-66d9ed9783b8",
+    "country": "GB",
+    "disambiguation": "trombone",
+    "name": "Nick Evans",
+    "sort-name": "Evans, Nick"
+   },
+   "attribute-ids": {},
+   "ended": true
+  },
+  {
+   "begin": "1969-10",
+   "attribute-values": {},
+   "end": "1970-03",
+   "target-type": "artist",
+   "target-credit": "",
+   "type": "member of band",
+   "type-id": "5be4c609-9afa-4ea0-910b-12ffb71e3821",
+   "attributes": [],
+   "direction": "backward",
+   "source-credit": "",
+   "artist": {
+    "sort-name": "Dobson, Lyn",
+    "name": "Lyn Dobson",
+    "disambiguation": "",
+    "country": null,
+    "id": "0e02cdac-8fd7-4e72-b2a4-db43ed594372",
+    "type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+    "type": "Person"
+   },
+   "attribute-ids": {},
+   "ended": true
+  },
+  {
+   "direction": "backward",
+   "attributes": [],
+   "target-credit": "",
+   "target-type": "artist",
+   "type-id": "5be4c609-9afa-4ea0-910b-12ffb71e3821",
+   "type": "member of band",
+   "begin": "1969-10",
+   "attribute-values": {},
+   "end": "1972-05",
+   "artist": {
+    "type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+    "type": "Person",
+    "country": "GB",
+    "id": "7dae06a6-6d49-47f8-ac55-317d670e6139",
+    "disambiguation": "",
+    "sort-name": "Dean, Elton",
+    "name": "Elton Dean"
+   },
+   "source-credit": "",
+   "attribute-ids": {},
+   "ended": true
+  },
+  {
+   "attribute-ids": {},
+   "ended": true,
+   "target-credit": "",
+   "target-type": "artist",
+   "type-id": "5be4c609-9afa-4ea0-910b-12ffb71e3821",
+   "type": "member of band",
+   "begin": "1971-08",
+   "end": "1972-01",
+   "attribute-values": {},
+   "direction": "backward",
+   "attributes": [],
+   "source-credit": "",
+   "artist": {
+    "name": "Phil Howard",
+    "sort-name": "Howard, Phil",
+    "disambiguation": "jazz drummer",
+    "type": "Person",
+    "type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+    "id": "616e81f2-ea1f-4705-9605-387eceb601d7",
+    "country": "AU"
+   }
+  },
+  {
+   "source-credit": "",
+   "artist": {
+    "name": "Karl Jenkins",
+    "sort-name": "Jenkins, Karl",
+    "id": "8f88db93-5914-4754-82ee-7d889bbc573e",
+    "country": "GB",
+    "type": "Person",
+    "type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+    "disambiguation": "Welsh composer, conductor and instrumentalist"
+   },
+   "begin": "1972",
+   "attribute-values": {},
+   "end": "1984",
+   "target-type": "artist",
+   "target-credit": "",
+   "type-id": "5be4c609-9afa-4ea0-910b-12ffb71e3821",
+   "type": "member of band",
+   "attributes": [],
+   "direction": "backward",
+   "ended": true,
+   "attribute-ids": {}
+  },
+  {
+   "ended": true,
+   "attribute-ids": {},
+   "source-credit": "",
+   "artist": {
+    "type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+    "type": "Person",
+    "id": "75ba3d00-6b1a-4d58-91ab-73b70d63f771",
+    "country": "GB",
+    "disambiguation": "UK jazz/rock drummer",
+    "name": "John Marshall",
+    "sort-name": "Marshall, John"
+   },
+   "target-credit": "",
+   "target-type": "artist",
+   "type": "member of band",
+   "type-id": "5be4c609-9afa-4ea0-910b-12ffb71e3821",
+   "begin": "1972",
+   "end": "1984",
+   "attribute-values": {},
+   "direction": "backward",
+   "attributes": []
+  },
+  {
+   "attribute-ids": {},
+   "ended": true,
+   "attributes": [],
+   "direction": "backward",
+   "begin": "1973-05",
+   "attribute-values": {},
+   "end": "1976-08",
+   "target-credit": "",
+   "target-type": "artist",
+   "type": "member of band",
+   "type-id": "5be4c609-9afa-4ea0-910b-12ffb71e3821",
+   "artist": {
+    "sort-name": "Babbington, Roy",
+    "name": "Roy Babbington",
+    "disambiguation": "",
+    "type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+    "type": "Person",
+    "country": "GB",
+    "id": "78a2560c-c187-4ce4-8420-48c7f46b7715"
+   },
+   "source-credit": ""
+  },
+  {
+   "source-credit": "",
+   "artist": {
+    "sort-name": "Holdsworth, Allan",
+    "name": "Allan Holdsworth",
+    "country": "GB",
+    "id": "a6396e33-9298-493e-9409-f0e1366b326b",
+    "type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+    "type": "Person",
+    "disambiguation": ""
+   },
+   "begin": "1973-12",
+   "attribute-values": {},
+   "end": "1975-04",
+   "target-credit": "",
+   "target-type": "artist",
+   "type-id": "5be4c609-9afa-4ea0-910b-12ffb71e3821",
+   "type": "member of band",
+   "attributes": [],
+   "direction": "backward",
+   "ended": true,
+   "attribute-ids": {}
+  },
+  {
+   "begin": "1975-04",
+   "end": "1978",
+   "attribute-values": {},
+   "target-credit": "",
+   "target-type": "artist",
+   "type": "member of band",
+   "type-id": "5be4c609-9afa-4ea0-910b-12ffb71e3821",
+   "attributes": [],
+   "direction": "backward",
+   "source-credit": "",
+   "artist": {
+    "name": "John Etheridge",
+    "sort-name": "Etheridge, John",
+    "disambiguation": "",
+    "type": "Person",
+    "type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+    "id": "791eaba5-dafe-4385-aac7-d8489508b27e",
+    "country": "GB"
+   },
+   "attribute-ids": {},
+   "ended": true
+  },
+  {
+   "ended": true,
+   "attribute-ids": {},
+   "source-credit": "",
+   "artist": {
+    "type": "Person",
+    "type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+    "id": "943edcb0-b9d8-4c06-b5a0-1835f97b714c",
+    "country": "GB",
+    "disambiguation": "",
+    "name": "Alan Wakeman",
+    "sort-name": "Wakeman, Alan"
+   },
+   "attribute-values": {},
+   "end": "1976-07",
+   "begin": "1976-01",
+   "type": "member of band",
+   "type-id": "5be4c609-9afa-4ea0-910b-12ffb71e3821",
+   "target-credit": "",
+   "target-type": "artist",
+   "attributes": [],
+   "direction": "backward"
+  },
+  {
+   "type-id": "5be4c609-9afa-4ea0-910b-12ffb71e3821",
+   "type": "member of band",
+   "target-type": "artist",
+   "target-credit": "",
+   "attribute-values": {},
+   "end": "1978",
+   "begin": "1976-09",
+   "direction": "backward",
+   "attributes": [],
+   "source-credit": "",
+   "artist": {
+    "id": "bf8176d7-48e8-4cc0-adde-ccc0a4cac757",
+    "country": "GB",
+    "type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+    "type": "Person",
+    "disambiguation": "",
+    "name": "Ric Sanders",
+    "sort-name": "Sanders, Ric"
+   },
+   "attribute-ids": {},
+   "ended": true
+  },
+  {
+   "attribute-ids": {},
+   "ended": true,
+   "direction": "backward",
+   "attributes": [],
+   "type": "member of band",
+   "type-id": "5be4c609-9afa-4ea0-910b-12ffb71e3821",
+   "target-credit": "",
+   "target-type": "artist",
+   "end": "1978",
+   "attribute-values": {},
+   "begin": "1976-12",
+   "artist": {
+    "name": "Steve Cook",
+    "sort-name": "Cook, Steve",
+    "id": "dbf27218-17e0-4296-98cc-580baea47735",
+    "country": "GB",
+    "type": "Person",
+    "type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+    "disambiguation": "UK jazz bassist"
+   },
+   "source-credit": ""
+  },
+  {
+   "begin": "1976",
+   "attribute-values": {},
+   "end": "1976-08",
+   "target-type": "artist",
+   "target-credit": "",
+   "type": "member of band",
+   "type-id": "5be4c609-9afa-4ea0-910b-12ffb71e3821",
+   "attributes": [],
+   "direction": "backward",
+   "source-credit": "",
+   "artist": {
+    "sort-name": "Warleigh, Ray",
+    "name": "Ray Warleigh",
+    "country": "GB",
+    "id": "09dd5b88-95b6-4f03-81e8-9add2f076ed8",
+    "type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+    "type": "Person",
+    "disambiguation": ""
+   },
+   "attribute-ids": {},
+   "ended": true
+  },
+  {
+   "direction": "backward",
+   "attributes": [],
+   "type": "member of band",
+   "type-id": "5be4c609-9afa-4ea0-910b-12ffb71e3821",
+   "target-credit": "",
+   "target-type": "artist",
+   "end": null,
+   "attribute-values": {},
+   "begin": null,
+   "artist": {
+    "name": "Alan Skidmore",
+    "sort-name": "Skidmore, Alan",
+    "id": "5c1f2126-2fb6-483a-b965-08ec5e137bac",
+    "country": "GB",
+    "type": "Person",
+    "type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+    "disambiguation": ""
+   },
+   "source-credit": "",
+   "attribute-ids": {},
+   "ended": false
+  },
+  {
+   "attribute-ids": {},
+   "ended": false,
+   "target-type": "artist",
+   "target-credit": "",
+   "type-id": "1af24726-5b1f-4b07-826e-5351723f504b",
+   "type": "named after artist",
+   "begin": null,
+   "end": null,
+   "attribute-values": {},
+   "direction": "backward",
+   "attributes": [],
+   "source-credit": "",
+   "artist": {
+    "sort-name": "Matching Mole",
+    "name": "Matching Mole",
+    "type": "Group",
+    "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+    "country": "GB",
+    "id": "5af8b5e4-8319-4f4b-9548-6e4e458ee923",
+    "disambiguation": ""
+   }
+  },
+  {
+   "attribute-ids": {},
+   "ended": false,
+   "attribute-values": {},
+   "end": null,
+   "begin": null,
+   "type-id": "a6f62641-2f58-470e-b02b-88d7b984dc9f",
+   "type": "tribute",
+   "target-credit": "",
+   "target-type": "artist",
+   "attributes": [],
+   "direction": "backward",
+   "source-credit": "",
+   "artist": {
+    "country": null,
+    "id": "6d37c52e-7f18-4682-813c-fce29d6f1954",
+    "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+    "type": "Group",
+    "disambiguation": "",
+    "sort-name": "Soft Machine Legacy",
+    "name": "Soft Machine Legacy"
+   }
+  },
+  {
+   "begin": null,
+   "end": null,
+   "attribute-values": {},
+   "target-type": "url",
+   "target-credit": "",
+   "type-id": "6b3e3c85-0002-4f34-aca6-80ace0d7e846",
+   "type": "allmusic",
+   "attributes": [],
+   "direction": "forward",
+   "source-credit": "",
+   "attribute-ids": {},
+   "ended": false,
+   "url": {
+    "id": "ab901334-3b94-47bb-93f5-cfa12b14ab7a",
+    "resource": "https://www.allmusic.com/artist/mn0000753685"
+   }
+  },
+  {
+   "direction": "forward",
+   "attributes": [],
+   "type-id": "ea45ed3d-2d5e-456e-8c32-94b6f51426e2",
+   "type": "bandsintown",
+   "target-credit": "",
+   "target-type": "url",
+   "attribute-values": {},
+   "end": null,
+   "begin": null,
+   "source-credit": "",
+   "attribute-ids": {},
+   "url": {
+    "id": "c0bb730b-6122-40b5-aa7a-534d62f3995a",
+    "resource": "https://www.bandsintown.com/a/56442"
+   },
+   "ended": false
+  },
+  {
+   "attribute-ids": {},
+   "url": {
+    "id": "f46f1686-9310-4272-9268-5edf40bc0d37",
+    "resource": "https://www.bbc.co.uk/music/artists/5193ce6b-a315-4c50-ae49-54e69ffbc988"
+   },
+   "ended": true,
+   "direction": "forward",
+   "attributes": [],
+   "target-type": "url",
+   "target-credit": "",
+   "type-id": "d028a975-000c-4525-9333-d3c8425e4b54",
+   "type": "BBC Music page",
+   "begin": null,
+   "attribute-values": {},
+   "end": "2020-11-19",
+   "source-credit": ""
+  },
+  {
+   "attribute-ids": {},
+   "ended": true,
+   "url": {
+    "resource": "http://www.btinternet.com/~stephen.yarwood/softs.htm",
+    "id": "cca2d512-71bf-4341-9e22-1443edd6010e"
+   },
+   "type-id": "78f75830-94e1-4138-8f8a-643e3bb21ce5",
+   "type": "biography",
+   "target-type": "url",
+   "target-credit": "",
+   "end": null,
+   "attribute-values": {},
+   "begin": null,
+   "direction": "forward",
+   "attributes": [],
+   "source-credit": ""
+  },
+  {
+   "url": {
+    "id": "e7ee84b5-c8d6-494d-a40c-4f6c0429345d",
+    "resource": "http://rac.neptunepinkfloyd.co.uk/Tourdate/SMdates.htm"
+   },
+   "ended": true,
+   "attribute-ids": {},
+   "source-credit": "",
+   "attributes": [],
+   "direction": "forward",
+   "end": null,
+   "attribute-values": {},
+   "begin": null,
+   "type-id": "4fb0eeec-a6eb-4ae3-ad52-b55765b94e8f",
+   "type": "discography page",
+   "target-credit": "",
+   "target-type": "url"
+  },
+  {
+   "direction": "forward",
+   "attributes": [],
+   "target-credit": "",
+   "target-type": "url",
+   "type-id": "04a5b104-a4c2-4bac-99a1-7b837c37d9e4",
+   "type": "discogs",
+   "begin": null,
+   "attribute-values": {},
+   "end": null,
+   "source-credit": "",
+   "attribute-ids": {},
+   "url": {
+    "id": "94f413dd-6765-47ad-9339-8b2adb877bde",
+    "resource": "https://www.discogs.com/artist/152680"
+   },
+   "ended": false
+  },
+  {
+   "end": null,
+   "attribute-values": {},
+   "begin": null,
+   "type": "fanpage",
+   "type-id": "f484f897-81cc-406e-96f9-cd799a04ee24",
+   "target-credit": "",
+   "target-type": "url",
+   "attributes": [],
+   "direction": "forward",
+   "source-credit": "",
+   "attribute-ids": {},
+   "ended": true,
+   "url": {
+    "id": "f2b678c0-8179-44af-835d-237f70bb5458",
+    "resource": "http://www.hulloder.nl/"
+   }
+  },
+  {
+   "ended": false,
+   "url": {
+    "id": "d13ec4fd-2e45-4641-bc70-1241b6660c5d",
+    "resource": "https://open.spotify.com/artist/5A0MH7JfEBEMySevsmauds"
+   },
+   "attribute-ids": {},
+   "source-credit": "",
+   "target-type": "url",
+   "target-credit": "",
+   "type-id": "769085a1-c2f7-4c24-a532-2375a77693bd",
+   "type": "free streaming",
+   "begin": null,
+   "attribute-values": {},
+   "end": null,
+   "direction": "forward",
+   "attributes": []
+  },
+  {
+   "type-id": "769085a1-c2f7-4c24-a532-2375a77693bd",
+   "type": "free streaming",
+   "target-type": "url",
+   "target-credit": "",
+   "end": null,
+   "attribute-values": {},
+   "begin": null,
+   "direction": "forward",
+   "attributes": [],
+   "source-credit": "",
+   "attribute-ids": {},
+   "ended": false,
+   "url": {
+    "resource": "https://www.deezer.com/artist/11114",
+    "id": "a0ce343f-d3b9-48bf-a24a-9d64ea431063"
+   }
+  },
+  {
+   "source-credit": "",
+   "target-credit": "",
+   "target-type": "url",
+   "type": "IMDb",
+   "type-id": "94c8b0cc-4477-4106-932c-da60e63de61c",
+   "begin": null,
+   "end": null,
+   "attribute-values": {},
+   "direction": "forward",
+   "attributes": [],
+   "ended": false,
+   "url": {
+    "id": "5e00a5f6-68d3-4084-8e41-5d54d5790f39",
+    "resource": "https://www.imdb.com/name/nm9551568/"
+   },
+   "attribute-ids": {}
+  },
+  {
+   "source-credit": "",
+   "attributes": [],
+   "direction": "forward",
+   "begin": null,
+   "end": null,
+   "attribute-values": {},
+   "target-credit": "",
+   "target-type": "url",
+   "type": "last.fm",
+   "type-id": "08db8098-c0df-4b78-82c3-c8697b4bba7f",
+   "url": {
+    "resource": "https://www.last.fm/music/Soft%20Machine",
+    "id": "c3f145bd-fa12-47ec-b738-ec2460aa1cfe"
+   },
+   "ended": false,
+   "attribute-ids": {}
+  },
+  {
+   "source-credit": "",
+   "end": null,
+   "attribute-values": {},
+   "begin": null,
+   "type-id": "e4d73442-3762-45a8-905c-401da65544ed",
+   "type": "lyrics",
+   "target-credit": "",
+   "target-type": "url",
+   "attributes": [],
+   "direction": "forward",
+   "ended": false,
+   "url": {
+    "id": "58fa492f-c1b2-4425-8fcd-3fcc98aa91ff",
+    "resource": "https://genius.com/artists/Soft-machine"
+   },
+   "attribute-ids": {}
+  },
+  {
+   "attribute-ids": {},
+   "url": {
+    "resource": "https://www.softmachine.org/",
+    "id": "f9973cfc-d7d8-4965-91dd-f371f080ed4e"
+   },
+   "ended": false,
+   "direction": "forward",
+   "attributes": [],
+   "target-type": "url",
+   "target-credit": "",
+   "type-id": "fe33d22f-c3b0-4d68-bd53-a856badf2b15",
+   "type": "official homepage",
+   "begin": null,
+   "attribute-values": {},
+   "end": null,
+   "source-credit": ""
+  },
+  {
+   "attribute-ids": {},
+   "ended": false,
+   "url": {
+    "id": "a1de10af-5998-4197-9ed4-f02718a3c1ac",
+    "resource": "http://id.loc.gov/authorities/names/n93037442"
+   },
+   "type": "other databases",
+   "type-id": "d94fb61c-fa20-4e3c-a19a-71a949fb2c55",
+   "target-type": "url",
+   "target-credit": "",
+   "attribute-values": {},
+   "end": null,
+   "begin": null,
+   "direction": "forward",
+   "attributes": [],
+   "source-credit": ""
+  },
+  {
+   "url": {
+    "id": "b72ca147-1192-4c97-9bfd-2d2ea94f7eef",
+    "resource": "https://catalogue.bnf.fr/ark:/12148/cb13906598h"
+   },
+   "ended": false,
+   "attribute-ids": {},
+   "source-credit": "",
+   "direction": "forward",
+   "attributes": [],
+   "type-id": "d94fb61c-fa20-4e3c-a19a-71a949fb2c55",
+   "type": "other databases",
+   "target-type": "url",
+   "target-credit": "",
+   "end": null,
+   "attribute-values": {},
+   "begin": null
+  },
+  {
+   "ended": false,
+   "url": {
+    "id": "3e88b9cb-f991-4895-8cdf-b685c16e48f3",
+    "resource": "https://d-nb.info/gnd/5505644-1"
+   },
+   "attribute-ids": {},
+   "source-credit": "",
+   "begin": null,
+   "end": null,
+   "attribute-values": {},
+   "target-type": "url",
+   "target-credit": "",
+   "type": "other databases",
+   "type-id": "d94fb61c-fa20-4e3c-a19a-71a949fb2c55",
+   "attributes": [],
+   "direction": "forward"
+  },
+  {
+   "type": "other databases",
+   "type-id": "d94fb61c-fa20-4e3c-a19a-71a949fb2c55",
+   "target-type": "url",
+   "target-credit": "",
+   "attribute-values": {},
+   "end": null,
+   "begin": null,
+   "direction": "forward",
+   "attributes": [],
+   "source-credit": "",
+   "attribute-ids": {},
+   "ended": false,
+   "url": {
+    "resource": "https://id.oclc.org/worldcat/entity/E39QQPVp7Kp7Hr3XC6mW6ggHdF",
+    "id": "ef999d64-298f-42a3-826c-4e06b67ac17f"
+   }
+  },
+  {
+   "direction": "forward",
+   "attributes": [],
+   "target-credit": "",
+   "target-type": "url",
+   "type-id": "d94fb61c-fa20-4e3c-a19a-71a949fb2c55",
+   "type": "other databases",
+   "begin": null,
+   "end": null,
+   "attribute-values": {},
+   "source-credit": "",
+   "attribute-ids": {},
+   "url": {
+    "resource": "https://rateyourmusic.com/artist/soft-machine",
+    "id": "493568ed-d461-4b0f-9c83-3cf01a43f11f"
+   },
+   "ended": false
+  },
+  {
+   "source-credit": "",
+   "type": "other databases",
+   "type-id": "d94fb61c-fa20-4e3c-a19a-71a949fb2c55",
+   "target-credit": "",
+   "target-type": "url",
+   "attribute-values": {},
+   "end": null,
+   "begin": null,
+   "direction": "forward",
+   "attributes": [],
+   "ended": false,
+   "url": {
+    "id": "e734c672-f176-4b19-868d-d9e19c4ec006",
+    "resource": "https://www.45cat.com/artist/soft-machine"
+   },
+   "attribute-ids": {}
+  },
+  {
+   "begin": null,
+   "attribute-values": {},
+   "end": null,
+   "target-type": "url",
+   "target-credit": "",
+   "type-id": "d94fb61c-fa20-4e3c-a19a-71a949fb2c55",
+   "type": "other databases",
+   "attributes": [],
+   "direction": "forward",
+   "source-credit": "",
+   "attribute-ids": {},
+   "ended": false,
+   "url": {
+    "id": "859299eb-3113-4cf6-bafc-e9d2a64b8609",
+    "resource": "https://www.jazzmusicarchives.com/artist/soft-machine"
+   }
+  },
+  {
+   "ended": false,
+   "url": {
+    "resource": "https://www.musik-sammler.de/artist/soft-machine/",
+    "id": "68fbf300-02cb-490d-a673-fd79b02e5e7b"
+   },
+   "attribute-ids": {},
+   "source-credit": "",
+   "attribute-values": {},
+   "end": null,
+   "begin": null,
+   "type-id": "d94fb61c-fa20-4e3c-a19a-71a949fb2c55",
+   "type": "other databases",
+   "target-credit": "",
+   "target-type": "url",
+   "attributes": [],
+   "direction": "forward"
+  },
+  {
+   "end": null,
+   "attribute-values": {},
+   "begin": null,
+   "type-id": "d94fb61c-fa20-4e3c-a19a-71a949fb2c55",
+   "type": "other databases",
+   "target-type": "url",
+   "target-credit": "",
+   "attributes": [],
+   "direction": "forward",
+   "source-credit": "",
+   "attribute-ids": {},
+   "ended": false,
+   "url": {
+    "id": "fca5c774-9998-46e0-b807-71c8ad5a47cf",
+    "resource": "https://www.progarchives.com/artist.asp?id=633"
+   }
+  },
+  {
+   "url": {
+    "resource": "https://www.spirit-of-rock.com/en/band/Soft_Machine",
+    "id": "4a2f4253-2c0b-40ec-b5b8-e837ea14868a"
+   },
+   "ended": false,
+   "attribute-ids": {},
+   "source-credit": "",
+   "attributes": [],
+   "direction": "forward",
+   "end": null,
+   "attribute-values": {},
+   "begin": null,
+   "type-id": "d94fb61c-fa20-4e3c-a19a-71a949fb2c55",
+   "type": "other databases",
+   "target-credit": "",
+   "target-type": "url"
+  },
+  {
+   "direction": "forward",
+   "attributes": [],
+   "type-id": "d94fb61c-fa20-4e3c-a19a-71a949fb2c55",
+   "type": "other databases",
+   "target-type": "url",
+   "target-credit": "",
+   "attribute-values": {},
+   "end": null,
+   "begin": null,
+   "source-credit": "",
+   "attribute-ids": {},
+   "url": {
+    "id": "0a18fa44-ff26-46a6-9ea9-187a9aaa7bee",
+    "resource": "https://www.whosampled.com/Soft-Machine/"
+   },
+   "ended": false
+  },
+  {
+   "begin": null,
+   "attribute-values": {},
+   "end": null,
+   "target-type": "url",
+   "target-credit": "",
+   "type-id": "f8319a2f-f824-4617-81c8-be6560b3b203",
+   "type": "purchase for download",
+   "attributes": [],
+   "direction": "forward",
+   "source-credit": "",
+   "attribute-ids": {},
+   "ended": false,
+   "url": {
+    "id": "de115323-3d04-4605-8841-39364a8e531a",
+    "resource": "https://itunes.apple.com/us/artist/id1414860397"
+   }
+  },
+  {
+   "attributes": [],
+   "direction": "forward",
+   "end": null,
+   "attribute-values": {},
+   "begin": null,
+   "type-id": "f8319a2f-f824-4617-81c8-be6560b3b203",
+   "type": "purchase for download",
+   "target-type": "url",
+   "target-credit": "",
+   "source-credit": "",
+   "attribute-ids": {},
+   "url": {
+    "resource": "https://www.qobuz.com/us-en/interpreter/soft-machine/71492",
+    "id": "6e89bf68-48a6-411a-b30e-34efc4db6e09"
+   },
+   "ended": false
+  },
+  {
+   "attribute-ids": {},
+   "ended": false,
+   "url": {
+    "resource": "https://secondhandsongs.com/artist/29285",
+    "id": "feee6a98-5388-444f-83a0-230a32cfba19"
+   },
+   "type": "secondhandsongs",
+   "type-id": "79c5b84d-a206-4f4c-9832-78c028c312c3",
+   "target-credit": "",
+   "target-type": "url",
+   "end": null,
+   "attribute-values": {},
+   "begin": null,
+   "direction": "forward",
+   "attributes": [],
+   "source-credit": ""
+  },
+  {
+   "attribute-ids": {},
+   "url": {
+    "id": "a4654ab0-b27b-495a-bff0-17773aff0d15",
+    "resource": "https://www.setlist.fm/setlists/soft-machine-bd6b52a.html"
+   },
+   "ended": false,
+   "direction": "forward",
+   "attributes": [],
+   "type": "setlistfm",
+   "type-id": "bf5d0d5e-27a1-4e94-9df7-3cdc67b3b207",
+   "target-credit": "",
+   "target-type": "url",
+   "end": null,
+   "attribute-values": {},
+   "begin": null,
+   "source-credit": ""
+  },
+  {
+   "type": "social network",
+   "type-id": "99429741-f3f6-484b-84f8-23af51991770",
+   "target-credit": "",
+   "target-type": "url",
+   "end": null,
+   "attribute-values": {},
+   "begin": null,
+   "direction": "forward",
+   "attributes": [],
+   "source-credit": "",
+   "attribute-ids": {},
+   "ended": false,
+   "url": {
+    "id": "ff1e18ba-36c0-43d0-9dde-6334ff3ca4cb",
+    "resource": "https://www.facebook.com/softmachinelegacy"
+   }
+  },
+  {
+   "attributes": [],
+   "direction": "forward",
+   "attribute-values": {},
+   "end": null,
+   "begin": null,
+   "type-id": "aac9c4bc-a5b9-30b8-9839-e3ac314c6e58",
+   "type": "songkick",
+   "target-credit": "",
+   "target-type": "url",
+   "source-credit": "",
+   "attribute-ids": {},
+   "url": {
+    "resource": "https://www.songkick.com/artists/68873",
+    "id": "aae8b619-7ab1-498b-affe-d107990c6a9f"
+   },
+   "ended": false
+  },
+  {
+   "attributes": [],
+   "direction": "forward",
+   "attribute-values": {},
+   "end": null,
+   "begin": null,
+   "type": "streaming",
+   "type-id": "63cc5d1f-f096-4c94-a43f-ecb32ea94161",
+   "target-type": "url",
+   "target-credit": "",
+   "source-credit": "",
+   "attribute-ids": {},
+   "url": {
+    "resource": "https://music.apple.com/gb/artist/7212088",
+    "id": "a4bd7799-d994-436a-9bc1-1f1763996ee6"
+   },
+   "ended": false
+  },
+  {
+   "attributes": [],
+   "direction": "forward",
+   "end": null,
+   "attribute-values": {},
+   "begin": null,
+   "type": "streaming",
+   "type-id": "63cc5d1f-f096-4c94-a43f-ecb32ea94161",
+   "target-credit": "",
+   "target-type": "url",
+   "source-credit": "",
+   "attribute-ids": {},
+   "url": {
+    "resource": "https://music.apple.com/us/artist/7212088",
+    "id": "520b9916-47fc-4140-aeb7-fb74f7bf919b"
+   },
+   "ended": false
+  },
+  {
+   "end": null,
+   "attribute-values": {},
+   "begin": null,
+   "type": "streaming",
+   "type-id": "63cc5d1f-f096-4c94-a43f-ecb32ea94161",
+   "target-type": "url",
+   "target-credit": "",
+   "attributes": [],
+   "direction": "forward",
+   "source-credit": "",
+   "attribute-ids": {},
+   "ended": false,
+   "url": {
+    "id": "46f7aeff-0813-4bbe-b5c4-f3b48055a64e",
+    "resource": "https://tidal.com/artist/3683"
+   }
+  },
+  {
+   "source-credit": "",
+   "begin": null,
+   "attribute-values": {},
+   "end": null,
+   "target-type": "url",
+   "target-credit": "",
+   "type": "streaming",
+   "type-id": "63cc5d1f-f096-4c94-a43f-ecb32ea94161",
+   "attributes": [],
+   "direction": "forward",
+   "ended": false,
+   "url": {
+    "resource": "https://www.qobuz.com/us-en/interpreter/soft-machine/71492",
+    "id": "6e89bf68-48a6-411a-b30e-34efc4db6e09"
+   },
+   "attribute-ids": {}
+  },
+  {
+   "attribute-values": {},
+   "end": null,
+   "begin": null,
+   "type": "VIAF",
+   "type-id": "e8571dcc-35d4-4e91-a577-a3382fd84460",
+   "target-type": "url",
+   "target-credit": "",
+   "attributes": [],
+   "direction": "forward",
+   "source-credit": "",
+   "attribute-ids": {},
+   "ended": false,
+   "url": {
+    "id": "e99f2bbf-ef07-4250-a3c4-3e8ed0d3c748",
+    "resource": "http://viaf.org/viaf/129146852"
+   }
+  },
+  {
+   "attribute-ids": {},
+   "ended": false,
+   "url": {
+    "resource": "https://www.wikidata.org/wiki/Q729505",
+    "id": "30b49409-4d9d-4a53-a205-857ef1dced82"
+   },
+   "begin": null,
+   "end": null,
+   "attribute-values": {},
+   "target-credit": "",
+   "target-type": "url",
+   "type": "wikidata",
+   "type-id": "689870a4-a1e4-4912-b17f-7b2664215698",
+   "attributes": [],
+   "direction": "forward",
+   "source-credit": ""
+  },
+  {
+   "source-credit": "",
+   "attributes": [],
+   "direction": "forward",
+   "attribute-values": {},
+   "end": null,
+   "begin": null,
+   "type-id": "631712a0-7525-42ba-b7a3-605aa7a238c4",
+   "type": "youtube music",
+   "target-credit": "",
+   "target-type": "url",
+   "url": {
+    "resource": "https://music.youtube.com/channel/UC_bfzbHoX0ftLRSkMZeAqoA",
+    "id": "527c720f-6fba-4891-81f5-61eeaa74aabc"
+   },
+   "ended": false,
+   "attribute-ids": {}
+  }
+ ],
+ "name": "Soft Machine",
+ "sort-name": "Soft Machine"
+}

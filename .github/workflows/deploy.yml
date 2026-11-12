@@ -1,0 +1,114 @@
+# Builds the explorer and publishes it to GitHub Pages.
+# One-time setup: repo Settings → Pages → Source: "GitHub Actions".
+#
+# The connection index (public/index/) is built from the latest MusicBrainz JSON dump and cached
+# per dump, so the ~1.8 GB download only happens when MusicBrainz publishes a new dump (twice a week).
+# The weekly schedule picks up new data even when nothing was pushed.
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '0 6 * * 1' # Mondays 06:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm test
+
+      - name: Find latest MusicBrainz dump and Discogs month
+        id: dump
+        run: |
+          name=$(curl -fsS https://data.metabrainz.org/pub/musicbrainz/data/json-dumps/LATEST | tr -d '[:space:]')
+          echo "name=$name" >> "$GITHUB_OUTPUT"
+          # Discogs publishes a releases dump on the 1st of each month.
+          echo "discogs=$(date -u +%Y%m)01" >> "$GITHUB_OUTPUT"
+
+      - name: Restore connection index
+        id: index-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: public/index
+          # Bump the version when the index format or builder changes (src/shared/index-format.ts).
+          key: index-v4-${{ steps.dump.outputs.name }}-discogs-${{ steps.dump.outputs.discogs }}
+
+      - name: Free disk space for the dumps (~13 GB)
+        if: steps.index-cache.outputs.cache-hit != 'true'
+        run: sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc /opt/hostedtoolcache/CodeQL && df -h /
+
+      - name: Build connection index from the dumps
+        id: build-index
+        if: steps.index-cache.outputs.cache-hit != 'true'
+        env:
+          DUMP_NAME: ${{ steps.dump.outputs.name }}
+          DISCOGS_MONTH: ${{ steps.dump.outputs.discogs }}
+        run: |
+          mkdir -p .cache/dump
+          base=https://data.metabrainz.org/pub/musicbrainz/data/json-dumps/$DUMP_NAME
+          curl -fsSL -o .cache/dump/artist.tar.xz "$base/artist.tar.xz"
+          curl -fsSL "$base/SHA256SUMS" | grep 'artist.tar.xz$' | sed 's#\*\?artist.tar.xz$#.cache/dump/artist.tar.xz#' | sha256sum -c -
+
+          # Discogs release credits (~11 GB): this month's dump, else last month's. Discogs sometimes
+          # rate-limits downloads; then the site is built from MusicBrainz alone (and not cached, so
+          # the next run tries again).
+          prev=$(date -u -d "$(date -u +%Y-%m-01) -1 month" +%Y%m)01
+          discogs=""
+          for d in "$DISCOGS_MONTH" "$prev"; do
+            f=".cache/dump/discogs_${d}_releases.xml.gz"
+            if curl -fsSL --retry 3 --retry-delay 120 -o "$f" "https://data.discogs.com/?download=data%2F${d:0:4}%2Fdiscogs_${d}_releases.xml.gz" && gzip -t "$f"; then
+              discogs="$f"; break
+            fi
+            rm -f "$f"
+          done
+          if [ -n "$discogs" ]; then
+            DISCOGS="$discogs" npm run build-index -- .cache/dump/artist.tar.xz
+            echo "with_discogs=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "::warning::Discogs dump unavailable; building from MusicBrainz only"
+            npm run build-index -- .cache/dump/artist.tar.xz
+          fi
+          rm -f .cache/dump/*.xz .cache/dump/*.gz
+
+      - name: Save connection index
+        if: steps.build-index.outputs.with_discogs == 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: public/index
+          key: index-v4-${{ steps.dump.outputs.name }}-discogs-${{ steps.dump.outputs.discogs }}
+
+      - run: npm run build
+        env:
+          # Project sites live at https://<user>.github.io/<repo>/
+          BASE_PATH: /${{ github.event.repository.name }}/
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

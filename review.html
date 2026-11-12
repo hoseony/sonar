@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sonar review</title>
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar">
+        <header class="brand">
+          <strong>Sonar</strong> <span class="muted">review</span>
+          <a href="/" target="_blank" class="open-site">Explorer ↗</a>
+        </header>
+        <p id="stats" class="muted stats"></p>
+        <form id="search-form">
+          <input id="search" type="search" placeholder="Search MusicBrainz artists…" autocomplete="off" />
+        </form>
+        <ul id="results" class="list"></ul>
+        <h3>Up next <span class="muted">· in graph, not yet reviewed</span></h3>
+        <ul id="frontier" class="list"></ul>
+      </aside>
+      <main id="main">
+        <div class="empty">
+          <h2>Start with an artist</h2>
+          <p class="muted">
+            Search on the left. Each artist's MusicBrainz relationships appear here as suggestions. Check the ones you
+            want, then save. Unchecked connections won't be suggested again.
+          </p>
+        </div>
+      </main>
+    </div>
+    <script type="module" src="/src/review/main.ts"></script>
+  </body>
+</html>

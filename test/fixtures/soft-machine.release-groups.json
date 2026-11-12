@@ -1,0 +1,934 @@
+[
+ {
+  "id": "0074e371-4aa0-4a00-ad7f-e2f20c9ebd7a",
+  "secondary-types": [
+   "Live"
+  ],
+  "secondary-type-ids": [
+   "6fd474e2-6b58-3102-9d17-d6f7eb7da0a0"
+  ],
+  "disambiguation": "",
+  "primary-type": "Album",
+  "title": "Høvikodden 1971",
+  "first-release-date": "2024-05-17",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc"
+ },
+ {
+  "id": "02fb032c-6266-3090-adeb-a0efbb19c847",
+  "secondary-types": [
+   "Compilation"
+  ],
+  "secondary-type-ids": [
+   "dd2a21e1-0c00-3729-a7a0-de60b84eb5d1"
+  ],
+  "disambiguation": "",
+  "title": "Fourth / Fifth",
+  "first-release-date": "1999",
+  "primary-type": "Album",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc"
+ },
+ {
+  "secondary-type-ids": [
+   "6fd474e2-6b58-3102-9d17-d6f7eb7da0a0"
+  ],
+  "id": "032a8302-1e67-3ffa-8860-ca2958d42fa9",
+  "secondary-types": [
+   "Live"
+  ],
+  "first-release-date": "1993",
+  "title": "BBC Radio 1 Live in Concert",
+  "primary-type": "Album",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "disambiguation": ""
+ },
+ {
+  "first-release-date": "2006-09-01",
+  "title": "Middle Earth Masters",
+  "primary-type": "Album",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "disambiguation": "",
+  "secondary-type-ids": [
+   "6fd474e2-6b58-3102-9d17-d6f7eb7da0a0"
+  ],
+  "id": "0cefcb81-9b18-35d6-b681-cf1711a2a1d1",
+  "secondary-types": [
+   "Live"
+  ]
+ },
+ {
+  "secondary-type-ids": [
+   "dd2a21e1-0c00-3729-a7a0-de60b84eb5d1"
+  ],
+  "id": "0e0ecb75-d77b-4166-931f-0b0e5db5175f",
+  "secondary-types": [
+   "Compilation"
+  ],
+  "primary-type": "Album",
+  "title": "MoonJune Years (Sampler)",
+  "first-release-date": "2017-11-07",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "disambiguation": ""
+ },
+ {
+  "secondary-types": [
+   "Compilation"
+  ],
+  "id": "0f0c790f-1a66-4465-b89f-9d1c5240b41e",
+  "secondary-type-ids": [
+   "dd2a21e1-0c00-3729-a7a0-de60b84eb5d1"
+  ],
+  "disambiguation": "",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "primary-type": "Album",
+  "first-release-date": "2015-04-18",
+  "title": "Wonderland"
+ },
+ {
+  "title": "Spaced",
+  "first-release-date": "1996",
+  "primary-type": "Album",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "disambiguation": "",
+  "secondary-type-ids": [],
+  "id": "1064fea9-f126-3eaf-9504-d78dc48909f0",
+  "secondary-types": []
+ },
+ {
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "title": "Facelift",
+  "first-release-date": "2002",
+  "primary-type": "Album",
+  "disambiguation": "",
+  "secondary-type-ids": [
+   "6fd474e2-6b58-3102-9d17-d6f7eb7da0a0"
+  ],
+  "secondary-types": [
+   "Live"
+  ],
+  "id": "13fe2acf-6293-41fb-b5e5-8fb3dde6de38"
+ },
+ {
+  "disambiguation": "",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "primary-type": "Album",
+  "title": "Volumes One & Two",
+  "first-release-date": "1989",
+  "secondary-types": [
+   "Compilation"
+  ],
+  "id": "149118a4-c343-316d-b325-4684a877f569",
+  "secondary-type-ids": [
+   "dd2a21e1-0c00-3729-a7a0-de60b84eb5d1"
+  ]
+ },
+ {
+  "secondary-type-ids": [
+   "dd2a21e1-0c00-3729-a7a0-de60b84eb5d1",
+   "6fd474e2-6b58-3102-9d17-d6f7eb7da0a0"
+  ],
+  "secondary-types": [
+   "Compilation",
+   "Live"
+  ],
+  "id": "171959dc-be5d-368b-8cea-2c601c50658b",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "primary-type": "Album",
+  "title": "BBC Radio 1967–1971",
+  "first-release-date": "2003-03-31",
+  "disambiguation": ""
+ },
+ {
+  "primary-type": "Album",
+  "title": "The Soft Machine",
+  "first-release-date": "1968-12",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "disambiguation": "",
+  "secondary-type-ids": [],
+  "id": "18e4c035-21e5-34da-8394-324b20d09d45",
+  "secondary-types": []
+ },
+ {
+  "id": "21adc1d5-c550-4787-8d7c-0fcbe11da9e5",
+  "secondary-types": [
+   "Compilation",
+   "Live"
+  ],
+  "secondary-type-ids": [
+   "dd2a21e1-0c00-3729-a7a0-de60b84eb5d1",
+   "6fd474e2-6b58-3102-9d17-d6f7eb7da0a0"
+  ],
+  "disambiguation": "",
+  "first-release-date": "2014-06-23",
+  "title": "Live in 1970",
+  "primary-type": "Album",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc"
+ },
+ {
+  "disambiguation": "",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "first-release-date": "1981-03",
+  "title": "Land of Cockayne",
+  "primary-type": "Album",
+  "secondary-types": [],
+  "id": "23a52060-8ae1-33d2-9eba-01883cc60a79",
+  "secondary-type-ids": []
+ },
+ {
+  "secondary-types": [
+   "Compilation",
+   "Live"
+  ],
+  "id": "265a9200-d598-4bbb-97ee-979a175d0ab4",
+  "secondary-type-ids": [
+   "dd2a21e1-0c00-3729-a7a0-de60b84eb5d1",
+   "6fd474e2-6b58-3102-9d17-d6f7eb7da0a0"
+  ],
+  "disambiguation": "",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "primary-type": "Album",
+  "first-release-date": "2022-03-25",
+  "title": "Facelift France and Holland"
+ },
+ {
+  "first-release-date": "1973-10-27",
+  "title": "Seven",
+  "primary-type": "Album",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "disambiguation": "",
+  "secondary-type-ids": [],
+  "id": "2968b67c-4562-3a75-ab45-acedefd21c00",
+  "secondary-types": []
+ },
+ {
+  "disambiguation": "",
+  "primary-type": "Album",
+  "first-release-date": "2004-02-09",
+  "title": "Man in a Deaf Corner: Anthology 63–70",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "id": "30d8931f-f44a-3078-91f4-06f297d467af",
+  "secondary-types": [
+   "Compilation"
+  ],
+  "secondary-type-ids": [
+   "dd2a21e1-0c00-3729-a7a0-de60b84eb5d1"
+  ]
+ },
+ {
+  "primary-type": "Album",
+  "title": "Soft Machine – Gong",
+  "first-release-date": "1971",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "disambiguation": "",
+  "secondary-type-ids": [
+   "dd2a21e1-0c00-3729-a7a0-de60b84eb5d1"
+  ],
+  "id": "339ce43b-b6c9-404e-a7f0-62390145325e",
+  "secondary-types": [
+   "Compilation"
+  ]
+ },
+ {
+  "disambiguation": "",
+  "primary-type": "Album",
+  "title": "Live in the 70s",
+  "first-release-date": "2015",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "id": "362b53b0-f21e-463a-a9d8-e3785374a66c",
+  "secondary-types": [
+   "Compilation",
+   "Live"
+  ],
+  "secondary-type-ids": [
+   "dd2a21e1-0c00-3729-a7a0-de60b84eb5d1",
+   "6fd474e2-6b58-3102-9d17-d6f7eb7da0a0"
+  ]
+ },
+ {
+  "secondary-type-ids": [
+   "6fd474e2-6b58-3102-9d17-d6f7eb7da0a0"
+  ],
+  "secondary-types": [
+   "Live"
+  ],
+  "id": "366d7f41-3386-4a77-a473-7367b7f37d60",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "primary-type": "Album",
+  "first-release-date": "2023-04-28",
+  "title": "The Dutch Lesson",
+  "disambiguation": ""
+ },
+ {
+  "secondary-type-ids": [
+   "6fd474e2-6b58-3102-9d17-d6f7eb7da0a0"
+  ],
+  "secondary-types": [
+   "Live"
+  ],
+  "id": "403d797f-84ec-391b-b708-c0f299e9d2ce",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "first-release-date": "1998-01-14",
+  "title": "Virtually",
+  "primary-type": "Album",
+  "disambiguation": ""
+ },
+ {
+  "id": "4221c545-6759-378f-9659-763ef23822e7",
+  "secondary-types": [
+   "Live"
+  ],
+  "secondary-type-ids": [
+   "6fd474e2-6b58-3102-9d17-d6f7eb7da0a0"
+  ],
+  "disambiguation": "",
+  "first-release-date": "1988-05",
+  "title": "Live at the Paradiso",
+  "primary-type": "Album",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc"
+ },
+ {
+  "disambiguation": "",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "first-release-date": "1975-03-22",
+  "title": "Bundles",
+  "primary-type": "Album",
+  "secondary-types": [],
+  "id": "42db8442-55c6-3af6-9a77-dc474a6853f9",
+  "secondary-type-ids": []
+ },
+ {
+  "disambiguation": "",
+  "primary-type": "Album",
+  "title": "Breda Reactor",
+  "first-release-date": "2005-03-21",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "id": "43b9e669-37ec-37a6-8202-9c2b9a6569d9",
+  "secondary-types": [
+   "Live"
+  ],
+  "secondary-type-ids": [
+   "6fd474e2-6b58-3102-9d17-d6f7eb7da0a0"
+  ]
+ },
+ {
+  "disambiguation": "",
+  "primary-type": "Album",
+  "first-release-date": "2012",
+  "title": "Live at the Roundhouse 1971",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "id": "45edb4f0-6ed0-4ca4-b945-5d55ec7f981f",
+  "secondary-types": [
+   "Live"
+  ],
+  "secondary-type-ids": [
+   "6fd474e2-6b58-3102-9d17-d6f7eb7da0a0"
+  ]
+ },
+ {
+  "secondary-types": [
+   "Compilation"
+  ],
+  "id": "526de3e1-9e08-4c9a-9e7c-336d5978c99d",
+  "secondary-type-ids": [
+   "dd2a21e1-0c00-3729-a7a0-de60b84eb5d1"
+  ],
+  "disambiguation": "",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "primary-type": "Album",
+  "title": "The Best of Soft Machine – The Harvest Years",
+  "first-release-date": "1995"
+ },
+ {
+  "secondary-type-ids": [],
+  "secondary-types": [],
+  "id": "57de41d5-2052-40a2-939e-e46c3d6b9eb5",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "primary-type": "Album",
+  "title": "Hidden Details",
+  "first-release-date": "2018-08-15",
+  "disambiguation": ""
+ },
+ {
+  "disambiguation": "",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "primary-type": "Album",
+  "title": "The Untouchable",
+  "first-release-date": "1990",
+  "secondary-types": [
+   "Compilation"
+  ],
+  "id": "59376416-7037-32fa-8d73-cabe9e6fa3bb",
+  "secondary-type-ids": [
+   "dd2a21e1-0c00-3729-a7a0-de60b84eb5d1"
+  ]
+ },
+ {
+  "secondary-type-ids": [
+   "6fd474e2-6b58-3102-9d17-d6f7eb7da0a0"
+  ],
+  "id": "5b471787-ae2f-326c-8f4f-eb944b70251a",
+  "secondary-types": [
+   "Live"
+  ],
+  "primary-type": "Album",
+  "first-release-date": "2005-09-05",
+  "title": "British Tour ’75",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "disambiguation": ""
+ },
+ {
+  "first-release-date": "2006-05-23",
+  "title": "Grides",
+  "primary-type": "Album",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "disambiguation": "",
+  "secondary-type-ids": [
+   "6fd474e2-6b58-3102-9d17-d6f7eb7da0a0"
+  ],
+  "id": "645dae14-cb39-37be-9305-b5ce00e3521c",
+  "secondary-types": [
+   "Live"
+  ]
+ },
+ {
+  "disambiguation": "",
+  "primary-type": "Album",
+  "title": "Other Doors",
+  "first-release-date": "2023-06-30",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "id": "69cf33b8-a429-4a3f-b762-c2593eaf4527",
+  "secondary-types": [],
+  "secondary-type-ids": []
+ },
+ {
+  "primary-type": "Album",
+  "first-release-date": "1992",
+  "title": "Softs / Alive and Well (Recorded in Paris) / Bundles",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "disambiguation": "",
+  "secondary-type-ids": [
+   "dd2a21e1-0c00-3729-a7a0-de60b84eb5d1"
+  ],
+  "id": "6abd4c8a-6428-4f44-880b-1456dfe03d49",
+  "secondary-types": [
+   "Compilation"
+  ]
+ },
+ {
+  "secondary-type-ids": [
+   "6fd474e2-6b58-3102-9d17-d6f7eb7da0a0"
+  ],
+  "id": "6bd8263c-a3df-3403-9d32-55de632753f2",
+  "secondary-types": [
+   "Live"
+  ],
+  "primary-type": "Album",
+  "title": "Live at the Proms 1970",
+  "first-release-date": "1988-08",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "disambiguation": ""
+ },
+ {
+  "secondary-types": [
+   "Live"
+  ],
+  "id": "6bdeced5-de37-4e25-90a7-1307908d2279",
+  "secondary-type-ids": [
+   "6fd474e2-6b58-3102-9d17-d6f7eb7da0a0"
+  ],
+  "disambiguation": "",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "first-release-date": "2015-02-15",
+  "title": "Switzerland 1974",
+  "primary-type": "Album"
+ },
+ {
+  "secondary-type-ids": [],
+  "secondary-types": [],
+  "id": "70b854fb-0e22-4ac3-bc8d-9e4eae51b4c6",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "title": "Thirteen",
+  "first-release-date": "2026-02-27",
+  "primary-type": "Album",
+  "disambiguation": ""
+ },
+ {
+  "disambiguation": "",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "first-release-date": "2010-10-22",
+  "title": "Original Album Classics",
+  "primary-type": "Album",
+  "secondary-types": [
+   "Compilation"
+  ],
+  "id": "7797c7bb-925e-4585-9377-f134b5c2d78e",
+  "secondary-type-ids": [
+   "dd2a21e1-0c00-3729-a7a0-de60b84eb5d1"
+  ]
+ },
+ {
+  "secondary-type-ids": [
+   "6fd474e2-6b58-3102-9d17-d6f7eb7da0a0"
+  ],
+  "id": "799f0d5b-68d0-4119-880f-12d941c9765b",
+  "secondary-types": [
+   "Live"
+  ],
+  "title": "Live at the Baked Potato",
+  "first-release-date": "2020-07-03",
+  "primary-type": "Album",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "disambiguation": ""
+ },
+ {
+  "primary-type": "Album",
+  "title": "Soft Machine Turns On, Volume 2",
+  "first-release-date": "2001",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "disambiguation": "",
+  "secondary-type-ids": [
+   "dd2a21e1-0c00-3729-a7a0-de60b84eb5d1"
+  ],
+  "id": "7a9ec422-e573-4482-bf22-40e80865500d",
+  "secondary-types": [
+   "Compilation"
+  ]
+ },
+ {
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "primary-type": "Album",
+  "first-release-date": "1991",
+  "title": "As If…",
+  "disambiguation": "",
+  "secondary-type-ids": [
+   "dd2a21e1-0c00-3729-a7a0-de60b84eb5d1"
+  ],
+  "secondary-types": [
+   "Compilation"
+  ],
+  "id": "7c4c5633-047e-4774-883d-e90263a0d06a"
+ },
+ {
+  "secondary-types": [
+   "Compilation"
+  ],
+  "id": "7e52b1a1-0095-48ad-9974-f332f0eecf97",
+  "secondary-type-ids": [
+   "dd2a21e1-0c00-3729-a7a0-de60b84eb5d1"
+  ],
+  "disambiguation": "",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "primary-type": "Album",
+  "title": "Out‐Bloody‐Rageous: An Anthology 1967–1973",
+  "first-release-date": "2005-05"
+ },
+ {
+  "secondary-types": [
+   "Live"
+  ],
+  "id": "7ff63440-ecd6-3d32-9afa-301dedeac11d",
+  "secondary-type-ids": [
+   "6fd474e2-6b58-3102-9d17-d6f7eb7da0a0"
+  ],
+  "disambiguation": "",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "first-release-date": "1990",
+  "title": "The Peel Sessions",
+  "primary-type": "Album"
+ },
+ {
+  "secondary-type-ids": [
+   "6fd474e2-6b58-3102-9d17-d6f7eb7da0a0"
+  ],
+  "id": "87fd31bc-5c2a-308f-b015-67540c6f08a7",
+  "secondary-types": [
+   "Live"
+  ],
+  "title": "Backwards",
+  "first-release-date": "2002-05-07",
+  "primary-type": "Album",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "disambiguation": ""
+ },
+ {
+  "secondary-type-ids": [
+   "dd2a21e1-0c00-3729-a7a0-de60b84eb5d1"
+  ],
+  "secondary-types": [
+   "Compilation"
+  ],
+  "id": "8df512d1-5dc7-4081-811d-bb79b69205ab",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "primary-type": "Album",
+  "first-release-date": "2014-09-01",
+  "title": "Tanglewood Tails",
+  "disambiguation": ""
+ },
+ {
+  "disambiguation": "",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "title": "Triple Echo",
+  "first-release-date": "1977-03",
+  "primary-type": "Album",
+  "secondary-types": [
+   "Compilation"
+  ],
+  "id": "8ff0258f-9330-39e6-86f1-dba5df33213a",
+  "secondary-type-ids": [
+   "dd2a21e1-0c00-3729-a7a0-de60b84eb5d1"
+  ]
+ },
+ {
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "primary-type": "Album",
+  "title": "Kings of Canterbury",
+  "first-release-date": "2003",
+  "disambiguation": "",
+  "secondary-type-ids": [
+   "6fd474e2-6b58-3102-9d17-d6f7eb7da0a0"
+  ],
+  "secondary-types": [
+   "Live"
+  ],
+  "id": "95126827-8b49-4d70-aa3e-da71454a9697"
+ },
+ {
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "primary-type": "Album",
+  "first-release-date": "1998",
+  "title": "Live 1970",
+  "disambiguation": "",
+  "secondary-type-ids": [
+   "6fd474e2-6b58-3102-9d17-d6f7eb7da0a0"
+  ],
+  "secondary-types": [
+   "Live"
+  ],
+  "id": "95c11b88-0cd7-32ed-97d1-963da7cf6596"
+ },
+ {
+  "secondary-type-ids": [
+   "dd2a21e1-0c00-3729-a7a0-de60b84eb5d1"
+  ],
+  "secondary-types": [
+   "Compilation"
+  ],
+  "id": "9661454a-30e4-4765-be57-a14940d482ee",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "first-release-date": "2019-08-21",
+  "title": "The Harvest Albums 1975–1978",
+  "primary-type": "Album",
+  "disambiguation": ""
+ },
+ {
+  "id": "97f3ead6-f6a6-46b4-8a27-a59982f4c4eb",
+  "secondary-types": [
+   "Live"
+  ],
+  "secondary-type-ids": [
+   "6fd474e2-6b58-3102-9d17-d6f7eb7da0a0"
+  ],
+  "disambiguation": "",
+  "primary-type": "Album",
+  "first-release-date": "2010",
+  "title": "NDR Jazz Workshop – Hamburg, Germany 1973",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc"
+ },
+ {
+  "disambiguation": "",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "title": "Somewhere in Soho",
+  "first-release-date": "2004-05",
+  "primary-type": "Album",
+  "secondary-types": [
+   "Live"
+  ],
+  "id": "9df4fc9c-717b-3d96-a0b7-5624aaa0ed9f",
+  "secondary-type-ids": [
+   "6fd474e2-6b58-3102-9d17-d6f7eb7da0a0"
+  ]
+ },
+ {
+  "secondary-types": [
+   "Live"
+  ],
+  "id": "9e32c252-d3b1-4c01-929a-963deb53fcdb",
+  "secondary-type-ids": [
+   "6fd474e2-6b58-3102-9d17-d6f7eb7da0a0"
+  ],
+  "disambiguation": "",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "title": "Cruise to the Edge 2019",
+  "first-release-date": "2019",
+  "primary-type": "Album"
+ },
+ {
+  "secondary-type-ids": [],
+  "id": "9fabbd9f-c6a2-3773-91ce-6ef937d47daa",
+  "secondary-types": [],
+  "primary-type": "Album",
+  "first-release-date": "1970-06-06",
+  "title": "Third",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "disambiguation": ""
+ },
+ {
+  "secondary-type-ids": [
+   "6fd474e2-6b58-3102-9d17-d6f7eb7da0a0"
+  ],
+  "secondary-types": [
+   "Live"
+  ],
+  "id": "a5526214-3244-3da0-bf47-6dc768d5b19c",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "primary-type": "Album",
+  "first-release-date": "2006-03",
+  "title": "Floating World Live",
+  "disambiguation": ""
+ },
+ {
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "title": "Soft Machine Turns On, Volume 1",
+  "first-release-date": "2001-04",
+  "primary-type": "Album",
+  "disambiguation": "",
+  "secondary-type-ids": [
+   "dd2a21e1-0c00-3729-a7a0-de60b84eb5d1"
+  ],
+  "secondary-types": [
+   "Compilation"
+  ],
+  "id": "aec93d97-5a24-4759-aee2-5da28b84cca3"
+ },
+ {
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "primary-type": "Album",
+  "title": "Fifth",
+  "first-release-date": "1972-06",
+  "disambiguation": "",
+  "secondary-type-ids": [],
+  "secondary-types": [],
+  "id": "b05f609e-8bb8-3500-8257-c0e0e217a05e"
+ },
+ {
+  "id": "b0aa1167-5282-3cfa-a35c-380fa6ce56cb",
+  "secondary-types": [
+   "Live"
+  ],
+  "secondary-type-ids": [
+   "6fd474e2-6b58-3102-9d17-d6f7eb7da0a0"
+  ],
+  "disambiguation": "",
+  "first-release-date": "1994",
+  "title": "BBC Radio 1 Live in Concert 1972",
+  "primary-type": "Album",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc"
+ },
+ {
+  "disambiguation": "",
+  "first-release-date": "1976",
+  "title": "Rubber Riff",
+  "primary-type": "Album",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "id": "b1d5d3d2-2aa2-3c66-976d-be263df65a41",
+  "secondary-types": [],
+  "secondary-type-ids": []
+ },
+ {
+  "disambiguation": "",
+  "primary-type": "Album",
+  "title": "Live at Henie Onstad Art Centre 1971",
+  "first-release-date": "2009",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "id": "b98c0d55-c0ac-47a1-bbd8-393bb5f6dabf",
+  "secondary-types": [
+   "Live"
+  ],
+  "secondary-type-ids": [
+   "6fd474e2-6b58-3102-9d17-d6f7eb7da0a0"
+  ]
+ },
+ {
+  "secondary-type-ids": [],
+  "secondary-types": [],
+  "id": "bf3f4d13-a65c-3dae-a84c-958430c98452",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "title": "Six",
+  "first-release-date": "1973-02",
+  "primary-type": "Album",
+  "disambiguation": ""
+ },
+ {
+  "secondary-type-ids": [
+   "6fd474e2-6b58-3102-9d17-d6f7eb7da0a0"
+  ],
+  "secondary-types": [
+   "Live"
+  ],
+  "id": "c425199a-1bc0-4a1c-9e3c-7c0bc2a9e0b7",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "first-release-date": "2009",
+  "title": "Drop",
+  "primary-type": "Album",
+  "disambiguation": ""
+ },
+ {
+  "secondary-type-ids": [
+   "6fd474e2-6b58-3102-9d17-d6f7eb7da0a0"
+  ],
+  "secondary-types": [
+   "Live"
+  ],
+  "id": "c53dd821-f37d-3e56-b8a3-d1eba0ffcc37",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "title": "Live in France",
+  "first-release-date": "1995",
+  "primary-type": "Album",
+  "disambiguation": ""
+ },
+ {
+  "id": "d1d38954-1554-3ce6-a1bc-5c2c779a11e9",
+  "secondary-types": [
+   "Live"
+  ],
+  "secondary-type-ids": [
+   "6fd474e2-6b58-3102-9d17-d6f7eb7da0a0"
+  ],
+  "disambiguation": "",
+  "first-release-date": "2000-01-25",
+  "title": "Noisette",
+  "primary-type": "Album",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc"
+ },
+ {
+  "title": "Orange Skin Food",
+  "first-release-date": "2005",
+  "primary-type": "Album",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "disambiguation": "",
+  "secondary-type-ids": [
+   "dd2a21e1-0c00-3729-a7a0-de60b84eb5d1",
+   "6fd474e2-6b58-3102-9d17-d6f7eb7da0a0"
+  ],
+  "id": "d7755166-c370-4caf-82d8-21585a0762f0",
+  "secondary-types": [
+   "Compilation",
+   "Live"
+  ]
+ },
+ {
+  "disambiguation": "",
+  "primary-type": "Album",
+  "first-release-date": "1972",
+  "title": "Faces and Places, Vol. 7",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "id": "debdcd12-3072-341d-a57a-056884cc5051",
+  "secondary-types": [
+   "Compilation"
+  ],
+  "secondary-type-ids": [
+   "dd2a21e1-0c00-3729-a7a0-de60b84eb5d1"
+  ]
+ },
+ {
+  "secondary-types": [],
+  "id": "dfe2d355-73da-3b69-a4c5-86d27773d486",
+  "secondary-type-ids": [],
+  "disambiguation": "",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "primary-type": "Album",
+  "title": "Volume Two",
+  "first-release-date": "1969-04"
+ },
+ {
+  "secondary-types": [
+   "Live"
+  ],
+  "id": "e05f1d30-b226-4925-abe7-5af950c876b6",
+  "secondary-type-ids": [
+   "6fd474e2-6b58-3102-9d17-d6f7eb7da0a0"
+  ],
+  "disambiguation": "",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "first-release-date": "",
+  "title": "Dada Insanity, Vol. 3 – Conquer America (1968)",
+  "primary-type": "Album"
+ },
+ {
+  "disambiguation": "",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "first-release-date": "1978",
+  "title": "Alive and Well in Paris",
+  "primary-type": "Album",
+  "secondary-types": [
+   "Live"
+  ],
+  "id": "e0e1b95a-54dc-3fcd-b9b5-7f401ed7e7a2",
+  "secondary-type-ids": [
+   "6fd474e2-6b58-3102-9d17-d6f7eb7da0a0"
+  ]
+ },
+ {
+  "secondary-type-ids": [
+   "dd2a21e1-0c00-3729-a7a0-de60b84eb5d1"
+  ],
+  "secondary-types": [
+   "Compilation"
+  ],
+  "id": "e332dfcd-e548-44d8-b32b-0a8477c58e9c",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "primary-type": "Album",
+  "first-release-date": "2010",
+  "title": "Tales of Taliesin (The EMI Years Anthology 1975–1981)",
+  "disambiguation": ""
+ },
+ {
+  "primary-type": "Album",
+  "first-release-date": "2003",
+  "title": "BBC Radio 1971–1974",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "disambiguation": "",
+  "secondary-type-ids": [
+   "dd2a21e1-0c00-3729-a7a0-de60b84eb5d1",
+   "6fd474e2-6b58-3102-9d17-d6f7eb7da0a0"
+  ],
+  "id": "eea41161-94c9-3aa8-b2b2-8818e8f8d2d8",
+  "secondary-types": [
+   "Compilation",
+   "Live"
+  ]
+ },
+ {
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "title": "Softs",
+  "first-release-date": "1976-06-25",
+  "primary-type": "Album",
+  "disambiguation": "",
+  "secondary-type-ids": [],
+  "secondary-types": [],
+  "id": "f648cf87-e801-3386-8c7d-d3be5d820856"
+ },
+ {
+  "secondary-types": [],
+  "id": "f6da9301-62ba-3553-adde-eb6589e4df70",
+  "secondary-type-ids": [],
+  "disambiguation": "",
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "primary-type": "Album",
+  "title": "Fourth",
+  "first-release-date": "1971-02"
+ },
+ {
+  "primary-type-id": "f529b476-6e62-324f-b0aa-1f3e33d313fc",
+  "first-release-date": "2014",
+  "title": "Turns On: An Early Collection",
+  "primary-type": "Album",
+  "disambiguation": "",
+  "secondary-type-ids": [
+   "dd2a21e1-0c00-3729-a7a0-de60b84eb5d1"
+  ],
+  "secondary-types": [
+   "Compilation"
+  ],
+  "id": "fea8a50a-589b-4362-8149-cf79908a26b6"
+ }
+]

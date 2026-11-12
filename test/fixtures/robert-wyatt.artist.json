@@ -1,0 +1,986 @@
+{
+ "name": "Robert Wyatt",
+ "disambiguation": "Canterbury scene",
+ "isnis": [
+  "000000011512109X"
+ ],
+ "ipis": [
+  "00054264587"
+ ],
+ "area": {
+  "type": null,
+  "iso-3166-1-codes": [
+   "GB"
+  ],
+  "sort-name": "United Kingdom",
+  "type-id": null,
+  "name": "United Kingdom",
+  "id": "8a754a16-0027-3a29-b6d7-2b40ea0481ed",
+  "disambiguation": ""
+ },
+ "type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+ "id": "9f041c61-f382-4048-a1f1-33105124bb99",
+ "gender": "Male",
+ "begin-area": {
+  "type-id": null,
+  "id": "40d758a4-b7c2-40f3-b439-5efbd2a3b038",
+  "name": "Bristol",
+  "disambiguation": "",
+  "iso-3166-2-codes": [
+   "GB-BST"
+  ],
+  "type": null,
+  "sort-name": "Bristol"
+ },
+ "sort-name": "Wyatt, Robert",
+ "gender-id": "36d3d30a-839d-3eda-8cb3-29be4384e4a9",
+ "relations": [
+  {
+   "source-credit": "",
+   "attributes": [],
+   "type": "married",
+   "ended": false,
+   "artist": {
+    "type": "Person",
+    "sort-name": "Benge, Alfreda",
+    "type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+    "id": "253fa967-cf14-45e6-bfe3-e7bd84cd0248",
+    "country": "GB",
+    "name": "Alfreda Benge",
+    "disambiguation": ""
+   },
+   "target-credit": "",
+   "attribute-values": {},
+   "end": null,
+   "direction": "forward",
+   "begin": "1974-06-26",
+   "target-type": "artist",
+   "attribute-ids": {},
+   "type-id": "b2bf7a5d-2da6-4742-baf4-e38d8a7ad029"
+  },
+  {
+   "target-credit": "",
+   "artist": {
+    "sort-name": "Wilde Flowers, The",
+    "type": "Group",
+    "disambiguation": "",
+    "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+    "id": "c469a897-dfd3-43cf-a252-8e364b0c7bb3",
+    "name": "The Wilde Flowers",
+    "country": "GB"
+   },
+   "ended": true,
+   "type": "member of band",
+   "attributes": [
+    "drums (drum set)",
+    "lead vocals"
+   ],
+   "source-credit": "",
+   "attribute-ids": {
+    "drums (drum set)": "12092505-6ee1-46af-a15a-b5b468b6b155",
+    "lead vocals": "8e2a3255-87c2-4809-a174-98cb3704f1a5"
+   },
+   "target-type": "artist",
+   "begin": "1964",
+   "type-id": "5be4c609-9afa-4ea0-910b-12ffb71e3821",
+   "end": "1966",
+   "attribute-values": {},
+   "attribute-credits": {},
+   "direction": "forward"
+  },
+  {
+   "artist": {
+    "id": "5193ce6b-a315-4c50-ae49-54e69ffbc988",
+    "name": "Soft Machine",
+    "country": "GB",
+    "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+    "disambiguation": "British rock band",
+    "type": "Group",
+    "sort-name": "Soft Machine"
+   },
+   "target-credit": "",
+   "source-credit": "",
+   "attributes": [
+    "original"
+   ],
+   "type": "member of band",
+   "ended": true,
+   "begin": "1966",
+   "target-type": "artist",
+   "attribute-ids": {
+    "original": "4fd3b255-a7d7-4424-9a63-40fa543b601c"
+   },
+   "type-id": "5be4c609-9afa-4ea0-910b-12ffb71e3821",
+   "attribute-values": {},
+   "end": "1971-08",
+   "direction": "forward"
+  },
+  {
+   "attribute-ids": {},
+   "target-type": "artist",
+   "begin": "1971-10",
+   "type-id": "5be4c609-9afa-4ea0-910b-12ffb71e3821",
+   "end": "1972-09",
+   "attribute-values": {},
+   "direction": "forward",
+   "target-credit": "",
+   "artist": {
+    "name": "Matching Mole",
+    "id": "5af8b5e4-8319-4f4b-9548-6e4e458ee923",
+    "country": "GB",
+    "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+    "disambiguation": "",
+    "type": "Group",
+    "sort-name": "Matching Mole"
+   },
+   "ended": true,
+   "type": "member of band",
+   "attributes": [],
+   "source-credit": ""
+  },
+  {
+   "type": "member of band",
+   "ended": false,
+   "source-credit": "",
+   "attributes": [],
+   "artist": {
+    "sort-name": "Centipede",
+    "type": "Group",
+    "disambiguation": "70s UK jazz/progressive rock/Canterbury sound big band",
+    "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+    "country": "GB",
+    "id": "18057468-ada5-4d9c-8322-c5ad279fbd22",
+    "name": "Centipede"
+   },
+   "target-credit": "",
+   "direction": "forward",
+   "end": null,
+   "attribute-values": {},
+   "type-id": "5be4c609-9afa-4ea0-910b-12ffb71e3821",
+   "target-type": "artist",
+   "attribute-ids": {},
+   "begin": null
+  },
+  {
+   "ended": false,
+   "type": "member of band",
+   "attributes": [
+    "drums (drum set)"
+   ],
+   "source-credit": "",
+   "target-credit": "",
+   "artist": {
+    "sort-name": "Daevid Allen Trio",
+    "type": "Group",
+    "disambiguation": "",
+    "type-id": "e431f5f6-b5d2-343d-8b36-72607fffb74b",
+    "id": "4ba4af16-f638-4a85-a51d-d710e8c97986",
+    "country": "GB",
+    "name": "Daevid Allen Trio"
+   },
+   "end": null,
+   "attribute-values": {},
+   "attribute-credits": {
+    "drums (drum set)": "drums"
+   },
+   "direction": "forward",
+   "attribute-ids": {
+    "drums (drum set)": "12092505-6ee1-46af-a15a-b5b468b6b155"
+   },
+   "target-type": "artist",
+   "begin": null,
+   "type-id": "5be4c609-9afa-4ea0-910b-12ffb71e3821"
+  },
+  {
+   "type": "sibling",
+   "ended": false,
+   "source-credit": "",
+   "attributes": [
+    "half"
+   ],
+   "artist": {
+    "type-id": "b6e035f4-3ce9-331c-97df-83397230b0df",
+    "id": "966bfcc0-9e9d-4517-b7f8-80ebd04b9caa",
+    "country": "GB",
+    "name": "Julian Glover",
+    "disambiguation": "English actor",
+    "type": "Person",
+    "sort-name": "Glover, Julian"
+   },
+   "target-credit": "",
+   "direction": "backward",
+   "end": null,
+   "attribute-values": {},
+   "type-id": "b42b7966-b904-449e-b8f9-8c7297b863d0",
+   "target-type": "artist",
+   "attribute-ids": {
+    "half": "305d384f-e5ca-4c34-9803-0075e442d803"
+   },
+   "begin": null
+  },
+  {
+   "type-id": "6b3e3c85-0002-4f34-aca6-80ace0d7e846",
+   "begin": null,
+   "attribute-ids": {},
+   "target-type": "url",
+   "direction": "forward",
+   "attribute-values": {},
+   "end": null,
+   "url": {
+    "resource": "https://www.allmusic.com/artist/mn0000292915",
+    "id": "55b8db62-5fbf-4e39-bf10-13845662c65d"
+   },
+   "target-credit": "",
+   "attributes": [],
+   "source-credit": "",
+   "ended": false,
+   "type": "allmusic"
+  },
+  {
+   "type-id": "d028a975-000c-4525-9333-d3c8425e4b54",
+   "target-type": "url",
+   "attribute-ids": {},
+   "begin": null,
+   "direction": "forward",
+   "end": "2020-11-19",
+   "attribute-values": {},
+   "url": {
+    "resource": "https://www.bbc.co.uk/music/artists/9f041c61-f382-4048-a1f1-33105124bb99",
+    "id": "0906ca3a-7c9e-48bd-ae42-98bc0c97f2f4"
+   },
+   "target-credit": "",
+   "type": "BBC Music page",
+   "ended": true,
+   "source-credit": "",
+   "attributes": []
+  },
+  {
+   "end": null,
+   "attribute-values": {},
+   "direction": "forward",
+   "attribute-ids": {},
+   "target-type": "url",
+   "begin": null,
+   "type-id": "04a5b104-a4c2-4bac-99a1-7b837c37d9e4",
+   "ended": false,
+   "type": "discogs",
+   "attributes": [],
+   "source-credit": "",
+   "url": {
+    "id": "db9aaf11-f21d-4a4e-b591-4d6570dc126e",
+    "resource": "https://www.discogs.com/artist/5049"
+   },
+   "target-credit": ""
+  },
+  {
+   "url": {
+    "id": "c1743ea8-8860-407b-9d80-187951d3cf79",
+    "resource": "https://open.spotify.com/artist/5iksmHDN2qZQcgFfXqIXtT"
+   },
+   "target-credit": "",
+   "source-credit": "",
+   "attributes": [],
+   "type": "free streaming",
+   "ended": false,
+   "begin": null,
+   "target-type": "url",
+   "attribute-ids": {},
+   "type-id": "769085a1-c2f7-4c24-a532-2375a77693bd",
+   "attribute-values": {},
+   "end": null,
+   "direction": "forward"
+  },
+  {
+   "direction": "forward",
+   "end": null,
+   "attribute-values": {},
+   "type-id": "769085a1-c2f7-4c24-a532-2375a77693bd",
+   "target-type": "url",
+   "attribute-ids": {},
+   "begin": null,
+   "type": "free streaming",
+   "ended": false,
+   "source-credit": "",
+   "attributes": [],
+   "url": {
+    "resource": "https://www.deezer.com/artist/4722",
+    "id": "c5d02bd7-916b-44dc-b6dc-f7b6b10ba0f8"
+   },
+   "target-credit": ""
+  },
+  {
+   "target-credit": "",
+   "url": {
+    "resource": "https://commons.wikimedia.org/wiki/File:Robert_Wyatt_1967.jpg",
+    "id": "1798239d-6fec-4965-8153-74e259e3303e"
+   },
+   "source-credit": "",
+   "attributes": [],
+   "type": "image",
+   "ended": false,
+   "begin": null,
+   "target-type": "url",
+   "attribute-ids": {},
+   "type-id": "221132e9-e30e-43f2-a741-15afc4c5fa7c",
+   "attribute-values": {},
+   "end": null,
+   "direction": "forward"
+  },
+  {
+   "begin": null,
+   "target-type": "url",
+   "attribute-ids": {},
+   "type-id": "221132e9-e30e-43f2-a741-15afc4c5fa7c",
+   "attribute-values": {},
+   "end": null,
+   "direction": "forward",
+   "target-credit": "",
+   "url": {
+    "id": "726d09c1-ebd1-4de8-8988-22769a93214e",
+    "resource": "https://commons.wikimedia.org/wiki/File:RobertWyatt_2006_(mirrored).jpg"
+   },
+   "source-credit": "",
+   "attributes": [],
+   "type": "image",
+   "ended": false
+  },
+  {
+   "attributes": [],
+   "source-credit": "",
+   "ended": false,
+   "type": "IMDb",
+   "url": {
+    "id": "7ffc08b5-cdfc-4a6a-96c3-65d141072134",
+    "resource": "https://www.imdb.com/name/nm0943580/"
+   },
+   "target-credit": "",
+   "attribute-values": {},
+   "end": null,
+   "direction": "forward",
+   "begin": null,
+   "attribute-ids": {},
+   "target-type": "url",
+   "type-id": "94c8b0cc-4477-4106-932c-da60e63de61c"
+  },
+  {
+   "direction": "forward",
+   "attribute-values": {},
+   "end": null,
+   "type-id": "08db8098-c0df-4b78-82c3-c8697b4bba7f",
+   "begin": null,
+   "attribute-ids": {},
+   "target-type": "url",
+   "attributes": [],
+   "source-credit": "",
+   "ended": false,
+   "type": "last.fm",
+   "url": {
+    "resource": "https://www.last.fm/music/Robert+Wyatt",
+    "id": "7e462c43-25f2-4230-86f6-b7121fbfaae6"
+   },
+   "target-credit": ""
+  },
+  {
+   "type": "lyrics",
+   "ended": false,
+   "source-credit": "",
+   "attributes": [],
+   "target-credit": "",
+   "url": {
+    "resource": "https://genius.com/artists/Robert-wyatt",
+    "id": "913a5f27-9175-43fa-8bee-804933a52466"
+   },
+   "end": null,
+   "attribute-values": {},
+   "direction": "forward",
+   "target-type": "url",
+   "attribute-ids": {},
+   "begin": null,
+   "type-id": "e4d73442-3762-45a8-905c-401da65544ed"
+  },
+  {
+   "target-credit": "",
+   "url": {
+    "id": "020c3e73-5b55-46a1-b185-29cf25aa2561",
+    "resource": "http://id.loc.gov/authorities/names/nr96005194"
+   },
+   "source-credit": "",
+   "attributes": [],
+   "type": "other databases",
+   "ended": false,
+   "type-id": "d94fb61c-fa20-4e3c-a19a-71a949fb2c55",
+   "begin": null,
+   "target-type": "url",
+   "attribute-ids": {},
+   "direction": "forward",
+   "attribute-values": {},
+   "end": null
+  },
+  {
+   "source-credit": "",
+   "attributes": [],
+   "type": "other databases",
+   "ended": false,
+   "url": {
+    "resource": "https://catalogue.bnf.fr/ark:/12148/cb13541070p",
+    "id": "5845434b-3bdf-4ff3-ac5d-0258e1f1795d"
+   },
+   "target-credit": "",
+   "attribute-values": {},
+   "end": null,
+   "direction": "forward",
+   "begin": null,
+   "target-type": "url",
+   "attribute-ids": {},
+   "type-id": "d94fb61c-fa20-4e3c-a19a-71a949fb2c55"
+  },
+  {
+   "url": {
+    "id": "edbcbae9-a9fb-451d-9242-4961caf753c0",
+    "resource": "https://d-nb.info/gnd/119278871"
+   },
+   "target-credit": "",
+   "attributes": [],
+   "source-credit": "",
+   "ended": false,
+   "type": "other databases",
+   "begin": null,
+   "attribute-ids": {},
+   "target-type": "url",
+   "type-id": "d94fb61c-fa20-4e3c-a19a-71a949fb2c55",
+   "attribute-values": {},
+   "end": null,
+   "direction": "forward"
+  },
+  {
+   "direction": "forward",
+   "end": null,
+   "attribute-values": {},
+   "type-id": "d94fb61c-fa20-4e3c-a19a-71a949fb2c55",
+   "target-type": "url",
+   "attribute-ids": {},
+   "begin": null,
+   "type": "other databases",
+   "ended": false,
+   "source-credit": "",
+   "attributes": [],
+   "target-credit": "",
+   "url": {
+    "id": "5c65fdb4-90c8-44b4-aa26-563acf89e34d",
+    "resource": "https://id.oclc.org/worldcat/entity/E39PBJk4B79VRkQytqFhvCKrv3"
+   }
+  },
+  {
+   "target-credit": "",
+   "url": {
+    "resource": "http://snaccooperative.org/ark:/99166/w61w2ttj",
+    "id": "aa411f8b-4a63-4295-9fa3-f346db37868a"
+   },
+   "type": "other databases",
+   "ended": false,
+   "source-credit": "",
+   "attributes": [],
+   "target-type": "url",
+   "attribute-ids": {},
+   "begin": null,
+   "type-id": "d94fb61c-fa20-4e3c-a19a-71a949fb2c55",
+   "end": null,
+   "attribute-values": {},
+   "direction": "forward"
+  },
+  {
+   "attribute-values": {},
+   "end": null,
+   "direction": "forward",
+   "begin": null,
+   "target-type": "url",
+   "attribute-ids": {},
+   "type-id": "d94fb61c-fa20-4e3c-a19a-71a949fb2c55",
+   "source-credit": "",
+   "attributes": [],
+   "type": "other databases",
+   "ended": false,
+   "url": {
+    "id": "e72bc1a3-b6f2-43c1-b92d-77f20674aaf5",
+    "resource": "https://rateyourmusic.com/artist/robert-wyatt"
+   },
+   "target-credit": ""
+  },
+  {
+   "target-credit": "",
+   "url": {
+    "resource": "https://www.jazzmusicarchives.com/artist/robert-wyatt",
+    "id": "876d3fa6-398e-4a4a-b715-d7321686cb89"
+   },
+   "ended": false,
+   "type": "other databases",
+   "attributes": [],
+   "source-credit": "",
+   "attribute-ids": {},
+   "target-type": "url",
+   "begin": null,
+   "type-id": "d94fb61c-fa20-4e3c-a19a-71a949fb2c55",
+   "end": null,
+   "attribute-values": {},
+   "direction": "forward"
+  },
+  {
+   "url": {
+    "id": "3e80e101-3ff1-4da4-9bb1-5e3db1d06405",
+    "resource": "https://www.musik-sammler.de/artist/robert-wyatt/"
+   },
+   "target-credit": "",
+   "ended": false,
+   "type": "other databases",
+   "attributes": [],
+   "source-credit": "",
+   "type-id": "d94fb61c-fa20-4e3c-a19a-71a949fb2c55",
+   "attribute-ids": {},
+   "target-type": "url",
+   "begin": null,
+   "direction": "forward",
+   "end": null,
+   "attribute-values": {}
+  },
+  {
+   "type-id": "d94fb61c-fa20-4e3c-a19a-71a949fb2c55",
+   "begin": null,
+   "attribute-ids": {},
+   "target-type": "url",
+   "direction": "forward",
+   "attribute-values": {},
+   "end": null,
+   "target-credit": "",
+   "url": {
+    "resource": "https://www.progarchives.com/artist.asp?id=1035",
+    "id": "da0f7dfe-f4c6-4dcd-bd42-dee41f2afade"
+   },
+   "attributes": [],
+   "source-credit": "",
+   "ended": false,
+   "type": "other databases"
+  },
+  {
+   "direction": "forward",
+   "attribute-values": {},
+   "end": null,
+   "type-id": "d94fb61c-fa20-4e3c-a19a-71a949fb2c55",
+   "begin": null,
+   "target-type": "url",
+   "attribute-ids": {},
+   "source-credit": "",
+   "attributes": [],
+   "type": "other databases",
+   "ended": false,
+   "target-credit": "",
+   "url": {
+    "id": "b4b24347-8609-4692-b0b9-236b2df51054",
+    "resource": "https://www.spirit-of-rock.com/en/band/Robert_Wyatt"
+   }
+  },
+  {
+   "url": {
+    "resource": "https://www.whosampled.com/Robert-Wyatt/",
+    "id": "c431f790-d1b0-463a-90a2-0c25bd3302ea"
+   },
+   "target-credit": "",
+   "source-credit": "",
+   "attributes": [],
+   "type": "other databases",
+   "ended": false,
+   "begin": null,
+   "target-type": "url",
+   "attribute-ids": {},
+   "type-id": "d94fb61c-fa20-4e3c-a19a-71a949fb2c55",
+   "attribute-values": {},
+   "end": null,
+   "direction": "forward"
+  },
+  {
+   "type-id": "f8319a2f-f824-4617-81c8-be6560b3b203",
+   "attribute-ids": {},
+   "target-type": "url",
+   "begin": null,
+   "direction": "forward",
+   "end": null,
+   "attribute-values": {},
+   "target-credit": "",
+   "url": {
+    "id": "8388b105-6aa1-49e4-9e10-758fe3ad9df7",
+    "resource": "https://mora.jp/artist/616348/"
+   },
+   "ended": false,
+   "type": "purchase for download",
+   "attributes": [],
+   "source-credit": ""
+  },
+  {
+   "direction": "forward",
+   "end": null,
+   "attribute-values": {},
+   "type-id": "f8319a2f-f824-4617-81c8-be6560b3b203",
+   "attribute-ids": {},
+   "target-type": "url",
+   "begin": null,
+   "ended": false,
+   "type": "purchase for download",
+   "attributes": [],
+   "source-credit": "",
+   "target-credit": "",
+   "url": {
+    "id": "e50e9178-2a07-471a-bee2-a288f3d9aaf6",
+    "resource": "https://music.apple.com/gb/artist/5618169"
+   }
+  },
+  {
+   "source-credit": "",
+   "attributes": [],
+   "type": "purchase for download",
+   "ended": false,
+   "target-credit": "",
+   "url": {
+    "id": "2a4b36cf-4937-42c6-9cf5-c0fc7a1646e6",
+    "resource": "https://music.bugs.co.kr/artist/42064"
+   },
+   "attribute-values": {},
+   "end": null,
+   "direction": "forward",
+   "begin": null,
+   "target-type": "url",
+   "attribute-ids": {},
+   "type-id": "f8319a2f-f824-4617-81c8-be6560b3b203"
+  },
+  {
+   "attributes": [],
+   "source-credit": "",
+   "ended": false,
+   "type": "purchase for download",
+   "url": {
+    "resource": "https://open.qobuz.com/artist/47163",
+    "id": "a69e1d62-83da-4646-871c-58bb33f9a9d6"
+   },
+   "target-credit": "",
+   "direction": "forward",
+   "attribute-values": {},
+   "end": null,
+   "type-id": "f8319a2f-f824-4617-81c8-be6560b3b203",
+   "begin": null,
+   "attribute-ids": {},
+   "target-type": "url"
+  },
+  {
+   "direction": "forward",
+   "end": null,
+   "attribute-values": {},
+   "type-id": "f8319a2f-f824-4617-81c8-be6560b3b203",
+   "target-type": "url",
+   "attribute-ids": {},
+   "begin": null,
+   "type": "purchase for download",
+   "ended": false,
+   "source-credit": "",
+   "attributes": [],
+   "target-credit": "",
+   "url": {
+    "resource": "https://ototoy.jp/_/default/a/865929",
+    "id": "0ad04e14-de19-4c31-a357-729840bdd304"
+   }
+  },
+  {
+   "begin": null,
+   "target-type": "url",
+   "attribute-ids": {},
+   "type-id": "f8319a2f-f824-4617-81c8-be6560b3b203",
+   "attribute-values": {},
+   "end": null,
+   "direction": "forward",
+   "url": {
+    "resource": "https://uk.7digital.com/artist/robert-wyatt",
+    "id": "06737b9c-fe19-4f3f-ae9e-97edfeb471b1"
+   },
+   "target-credit": "",
+   "source-credit": "",
+   "attributes": [],
+   "type": "purchase for download",
+   "ended": false
+  },
+  {
+   "target-type": "url",
+   "attribute-ids": {},
+   "begin": null,
+   "type-id": "f8319a2f-f824-4617-81c8-be6560b3b203",
+   "end": null,
+   "attribute-values": {},
+   "direction": "forward",
+   "target-credit": "",
+   "url": {
+    "resource": "https://www.melon.com/artist/detail.htm?artistId=33753",
+    "id": "b1585edb-52ed-4c5d-8ffa-86f6d9986279"
+   },
+   "type": "purchase for download",
+   "ended": false,
+   "source-credit": "",
+   "attributes": []
+  },
+  {
+   "direction": "forward",
+   "end": null,
+   "attribute-values": {},
+   "type-id": "f8319a2f-f824-4617-81c8-be6560b3b203",
+   "target-type": "url",
+   "attribute-ids": {},
+   "begin": null,
+   "type": "purchase for download",
+   "ended": false,
+   "source-credit": "",
+   "attributes": [],
+   "target-credit": "",
+   "url": {
+    "resource": "https://www.qobuz.com/gb-en/interpreter/robert-wyatt/47163",
+    "id": "167f7aca-d2bd-4f6c-a6f2-f634b29ae7ea"
+   }
+  },
+  {
+   "attributes": [],
+   "source-credit": "",
+   "ended": false,
+   "type": "secondhandsongs",
+   "url": {
+    "resource": "https://secondhandsongs.com/artist/8446",
+    "id": "9d19795e-6d3d-42c8-b31a-be8aa5e6305b"
+   },
+   "target-credit": "",
+   "attribute-values": {},
+   "end": null,
+   "direction": "forward",
+   "begin": null,
+   "attribute-ids": {},
+   "target-type": "url",
+   "type-id": "79c5b84d-a206-4f4c-9832-78c028c312c3"
+  },
+  {
+   "begin": null,
+   "target-type": "url",
+   "attribute-ids": {},
+   "type-id": "bf5d0d5e-27a1-4e94-9df7-3cdc67b3b207",
+   "attribute-values": {},
+   "end": null,
+   "direction": "forward",
+   "url": {
+    "id": "de7369f4-9564-48cd-9ad1-4aed57f667f2",
+    "resource": "https://www.setlist.fm/setlists/robert-wyatt-3bd6a078.html"
+   },
+   "target-credit": "",
+   "source-credit": "",
+   "attributes": [],
+   "type": "setlistfm",
+   "ended": false
+  },
+  {
+   "direction": "forward",
+   "end": null,
+   "attribute-values": {},
+   "type-id": "aac9c4bc-a5b9-30b8-9839-e3ac314c6e58",
+   "target-type": "url",
+   "attribute-ids": {},
+   "begin": null,
+   "type": "songkick",
+   "ended": false,
+   "source-credit": "",
+   "attributes": [],
+   "url": {
+    "id": "ffa82018-8d68-4d1c-b632-9bb27e6b611d",
+    "resource": "https://www.songkick.com/artists/157683"
+   },
+   "target-credit": ""
+  },
+  {
+   "url": {
+    "resource": "https://soundcloud.com/robert-wyatt-official",
+    "id": "a03a5abf-c906-4c1a-af8b-8e6190764839"
+   },
+   "target-credit": "",
+   "type": "soundcloud",
+   "ended": false,
+   "source-credit": "",
+   "attributes": [],
+   "type-id": "89e4a949-0976-440d-bda1-5f772c1e5710",
+   "target-type": "url",
+   "attribute-ids": {},
+   "begin": null,
+   "direction": "forward",
+   "end": null,
+   "attribute-values": {}
+  },
+  {
+   "attribute-values": {},
+   "end": null,
+   "direction": "forward",
+   "begin": null,
+   "target-type": "url",
+   "attribute-ids": {},
+   "type-id": "63cc5d1f-f096-4c94-a43f-ecb32ea94161",
+   "source-credit": "",
+   "attributes": [],
+   "type": "streaming",
+   "ended": false,
+   "url": {
+    "resource": "https://music.apple.com/gb/artist/5618169",
+    "id": "e50e9178-2a07-471a-bee2-a288f3d9aaf6"
+   },
+   "target-credit": ""
+  },
+  {
+   "type-id": "63cc5d1f-f096-4c94-a43f-ecb32ea94161",
+   "target-type": "url",
+   "attribute-ids": {},
+   "begin": null,
+   "direction": "forward",
+   "end": null,
+   "attribute-values": {},
+   "url": {
+    "resource": "https://music.bugs.co.kr/artist/42064",
+    "id": "2a4b36cf-4937-42c6-9cf5-c0fc7a1646e6"
+   },
+   "target-credit": "",
+   "type": "streaming",
+   "ended": false,
+   "source-credit": "",
+   "attributes": []
+  },
+  {
+   "ended": false,
+   "type": "streaming",
+   "attributes": [],
+   "source-credit": "",
+   "url": {
+    "resource": "https://open.qobuz.com/artist/47163",
+    "id": "a69e1d62-83da-4646-871c-58bb33f9a9d6"
+   },
+   "target-credit": "",
+   "direction": "forward",
+   "end": null,
+   "attribute-values": {},
+   "type-id": "63cc5d1f-f096-4c94-a43f-ecb32ea94161",
+   "attribute-ids": {},
+   "target-type": "url",
+   "begin": null
+  },
+  {
+   "direction": "forward",
+   "attribute-values": {},
+   "end": null,
+   "type-id": "63cc5d1f-f096-4c94-a43f-ecb32ea94161",
+   "begin": null,
+   "attribute-ids": {},
+   "target-type": "url",
+   "attributes": [],
+   "source-credit": "",
+   "ended": false,
+   "type": "streaming",
+   "url": {
+    "id": "283b4b1e-8514-4baf-a4b9-783a69e9ae25",
+    "resource": "https://tidal.com/artist/7142"
+   },
+   "target-credit": ""
+  },
+  {
+   "type": "streaming",
+   "ended": false,
+   "source-credit": "",
+   "attributes": [],
+   "target-credit": "",
+   "url": {
+    "id": "b1585edb-52ed-4c5d-8ffa-86f6d9986279",
+    "resource": "https://www.melon.com/artist/detail.htm?artistId=33753"
+   },
+   "end": null,
+   "attribute-values": {},
+   "direction": "forward",
+   "target-type": "url",
+   "attribute-ids": {},
+   "begin": null,
+   "type-id": "63cc5d1f-f096-4c94-a43f-ecb32ea94161"
+  },
+  {
+   "target-credit": "",
+   "url": {
+    "resource": "https://www.qobuz.com/gb-en/interpreter/robert-wyatt/47163",
+    "id": "167f7aca-d2bd-4f6c-a6f2-f634b29ae7ea"
+   },
+   "attributes": [],
+   "source-credit": "",
+   "ended": false,
+   "type": "streaming",
+   "type-id": "63cc5d1f-f096-4c94-a43f-ecb32ea94161",
+   "begin": null,
+   "attribute-ids": {},
+   "target-type": "url",
+   "direction": "forward",
+   "attribute-values": {},
+   "end": null
+  },
+  {
+   "direction": "forward",
+   "end": null,
+   "attribute-values": {},
+   "type-id": "e8571dcc-35d4-4e91-a577-a3382fd84460",
+   "attribute-ids": {},
+   "target-type": "url",
+   "begin": null,
+   "ended": false,
+   "type": "VIAF",
+   "attributes": [],
+   "source-credit": "",
+   "url": {
+    "id": "b41ad6e5-155b-4d53-b002-8723fe8a107f",
+    "resource": "http://viaf.org/viaf/118827651"
+   },
+   "target-credit": ""
+  },
+  {
+   "direction": "forward",
+   "end": null,
+   "attribute-values": {},
+   "type-id": "689870a4-a1e4-4912-b17f-7b2664215698",
+   "target-type": "url",
+   "attribute-ids": {},
+   "begin": null,
+   "type": "wikidata",
+   "ended": false,
+   "source-credit": "",
+   "attributes": [],
+   "target-credit": "",
+   "url": {
+    "resource": "https://www.wikidata.org/wiki/Q312693",
+    "id": "008d2590-2692-4179-9185-7fd1b0bca738"
+   }
+  },
+  {
+   "type-id": "631712a0-7525-42ba-b7a3-605aa7a238c4",
+   "target-type": "url",
+   "attribute-ids": {},
+   "begin": null,
+   "direction": "forward",
+   "end": null,
+   "attribute-values": {},
+   "target-credit": "",
+   "url": {
+    "id": "99891e93-ebb6-4ede-8364-5c765075b7ce",
+    "resource": "https://music.youtube.com/channel/UCr7lcc9jtJX2q7Nd2EtyGwQ"
+   },
+   "type": "youtube music",
+   "ended": false,
+   "source-credit": "",
+   "attributes": []
+  }
+ ],
+ "type": "Person",
+ "life-span": {
+  "ended": false,
+  "end": null,
+  "begin": "1945-01-28"
+ },
+ "country": "GB",
+ "end-area": null
+}

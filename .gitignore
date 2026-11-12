@@ -1,0 +1,7 @@
+node_modules
+dist
+.cache
+.env.local
+public/graph.export.json
+.DS_Store
+public/index

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="An explorable map of musicians and the bands, projects and records that connect them." />
+    <title>Sonar</title>
+  </head>
+  <body>
+    <div id="graph" aria-label="Artist connection graph"></div>
+
+    <div class="topbar">
+      <div class="brand"><strong>Sonar</strong></div>
+      <div class="search-wrap">
+        <input id="search" type="search" placeholder="Search any artist…" autocomplete="off"
+          role="combobox" aria-expanded="false" aria-controls="search-list" />
+        <ul id="search-list" class="dropdown" role="listbox" hidden></ul>
+      </div>
+      <button id="reset" class="reset" type="button" title="Clear the map">Clear</button>
+      <details class="filters connect-menu">
+        <summary>Connect</summary>
+        <div id="connect-controls"></div>
+      </details>
+      <details class="filters layout-menu">
+        <summary>Layout</summary>
+        <div id="layout-controls"></div>
+      </details>
+      <details class="filters">
+        <summary>Filters</summary>
+        <div id="filter-list"></div>
+      </details>
+    </div>
+
+    <div id="activity" class="activity" role="status" aria-live="polite">
+      <span class="spinner" aria-hidden="true"></span>
+      <span class="text"></span>
+      <span class="count"></span>
+      <button class="action" type="button" hidden></button>
+      <span class="track" aria-hidden="true"><span class="bar"></span></span>
+    </div>
+
+    <div class="legend muted">
+      <span><span class="shape circle band"></span>band</span>
+      <span><span class="shape circle person"></span>person</span>
+      <span><span class="shape circle"></span>explored</span>
+      <span><span class="shape ring"></span>more to explore</span>
+      <span class="scenes"><span class="swatches"><i></i><i></i><i></i><i></i></span>colors = scenes</span>
+    </div>
+
+    <div class="zoom" role="group" aria-label="Zoom">
+      <button id="zoom-in" type="button" aria-label="Zoom in" title="Zoom in (+)">+</button>
+      <button id="zoom-out" type="button" aria-label="Zoom out" title="Zoom out (−)">−</button>
+      <button id="zoom-fit" type="button" aria-label="Fit everything" title="Fit everything (0)">⤢</button>
+      <button id="zoom-home" type="button" aria-label="Back to start" title="Back to the artist you searched (H)">⌂</button>
+    </div>
+
+    <div id="hovercard" class="hovercard" hidden></div>
+    <aside id="panel" hidden></aside>
+    <div id="status" class="welcome"><p class="muted">Loading…</p></div>
+    <button id="panel-reopen" class="panel-reopen" type="button" hidden></button>
+
+    <script type="module" src="/src/site/main.ts"></script>
+  </body>
+</html>
