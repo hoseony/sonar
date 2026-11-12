@@ -317,7 +317,14 @@ async function boot() {
   const PERSON_SHADE = 0.38;
 
   // Plain objects in, sigma display data out (custom variables like innerColor aren't in its types).
-  const look = (o: Record<string, unknown>) => o as never;
+  /** The node being styled right now (see the node reducer). */
+  let styling: string | null = null;
+  // Every node style goes through here. The hovered node keeps its look (selected, start, …) but
+  // its map label steps aside: the hover chip takes its place, so there's only ever one label.
+  const look = (o: Record<string, unknown>) =>
+    (styling !== null && styling === state.hovered
+      ? { ...o, labelVisibility: 'hidden', backdropVisibility: 'hidden', highlighted: true, zIndex: Math.max(5, (o.zIndex as number) ?? 0) }
+      : o) as never;
 
   const renderer = new Sigma(graph, container, {
     // Nodes are circles. An artist whose connections aren't loaded yet is a hollow ring
@@ -364,6 +371,7 @@ async function boot() {
       maxCameraRatio: 60,
     },
     nodeReducer: (key, _data, attrs) => {
+      styling = key;
       if (!isNodeVisible(key)) return { visibility: 'hidden' };
       const kind = attrs.kind as ExportNode['kind'];
       const hue = hueOf(key, kind);
@@ -379,9 +387,6 @@ async function boot() {
       };
       // A name hovered in the panel lights up on the map, whatever else is going on.
       if (key === state.peek) return look({ ...base, labelVisibility: 'visible', zIndex: 5, highlighted: true, size: (attrs.size as number) + 3 });
-      // The node under (or nearest to) the pointer: its label is drawn as a styled chip in the DOM
-      // (name, what it is, how many more) right where the label goes; see placeChip.
-      if (key === state.hovered && key !== state.origin) return look({ ...base, labelVisibility: 'hidden', zIndex: 5, highlighted: true });
       // Your starting point is always findable: a bright ring (text color: white on dark, near-black
       // on light) around its scene color, bigger, always labeled.
       // Its name sits on a solid pill so it reads against anything behind it.
@@ -1255,7 +1260,7 @@ async function boot() {
   /** Puts the chip where the hovered node's label would be: just right of the node, centered on it. */
   function placeChip() {
     const id = state.hovered;
-    if (!id || !graph.hasNode(id) || id === state.origin) return void (chip.hidden = true);
+    if (!id || !graph.hasNode(id) || !isNodeVisible(id)) return void (chip.hidden = true);
     const p = renderer.graphToViewport(graph.getNodeAttributes(id) as { x: number; y: number });
     const ratio = camera.getState().ratio;
     const radius = (renderer.getNodeDisplayData(id)?.size ?? 6) / (ratio < 1 ? 1 : Math.sqrt(ratio));
@@ -1266,7 +1271,17 @@ async function boot() {
     if (x + chip.offsetWidth > width - 8) x = p.x - radius - 6 - chip.offsetWidth;
     chip.style.transform = `translate(${Math.round(x)}px, ${Math.round(p.y - chip.offsetHeight / 2)}px)`;
   }
-  renderer.on('afterRender', placeChip); // follows the node as the map moves and settles
+  // Follow the node every frame while the chip shows (the map pans, zooms and settles under it).
+  let chipFrame = 0;
+  const followChip = () => {
+    chipFrame = 0;
+    placeChip();
+    if (!chip.hidden) chipFrame = requestAnimationFrame(followChip);
+  };
+  renderer.on('afterRender', () => {
+    placeChip();
+    if (!chip.hidden && !chipFrame) chipFrame = requestAnimationFrame(followChip);
+  });
 
   // Hover snaps to the nearest artist within SNAP_PX of the pointer, not only the one exactly under
   // it: small dots are hard to hit, and you shouldn't have to aim to read a name.
@@ -1280,8 +1295,10 @@ async function boot() {
     if (node === state.hovered) return;
     state.hovered = node;
     container.style.cursor = node ? 'pointer' : '';
-    if (node) fillChip(node);
-    else chip.hidden = true;
+    if (node) {
+      fillChip(node);
+      if (!chipFrame) chipFrame = requestAnimationFrame(followChip);
+    } else chip.hidden = true;
     refresh();
   }
 
@@ -1312,6 +1329,15 @@ async function boot() {
       if (!pointerDown) setHovered(exactHover ?? nearestNode());
     });
   };
+  // The map moving under a still pointer (trackpad pan, scroll, zoom, a camera animation) changes
+  // what's nearest: look again, so the hover stays with the pointer instead of riding along with
+  // the map. While you drag the map itself, there's no hover at all.
+  camera.on('updated', () => {
+    if (pointerDown) {
+      exactHover = null;
+      setHovered(null);
+    } else if (pointer) scheduleHover();
+  });
   container.addEventListener('pointermove', (e) => {
     const r = container.getBoundingClientRect();
     pointer = { x: e.clientX - r.left, y: e.clientY - r.top };

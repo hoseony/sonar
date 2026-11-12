@@ -117,3 +117,8 @@ a {
   background: var(--album);
   border-radius: 2px;
 }
+
+/* The hidden attribute always hides, even on elements styled display:flex/grid. */
+[hidden] {
+  display: none !important;
+}
