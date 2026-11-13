@@ -15,6 +15,7 @@ import { renderPanel, type PanelContext } from './panel.ts';
 import { findPath, type PathResult } from './path.ts';
 import { Physics } from './physics.ts';
 import { attachSearch, type SearchIndex, type SearchItem } from './search.ts';
+import { track } from './stats.ts';
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T;
 const container = $<HTMLDivElement>('graph');
@@ -562,6 +563,7 @@ async function boot() {
     await expand(id);
     activity.clear('load');
     if (token !== exploreToken || !expanded.has(id)) return;
+    track(`open: ${name()}`);
     if (state.selected === id && !userCamera) fitNodes(oneHop(id), 700, 1.8, 1);
     // While the map grows and settles around them, keep this artist in the middle of the view.
     const growth = { done: false };
@@ -638,6 +640,7 @@ async function boot() {
   async function exploreChildren(id: string) {
     const frontier = nextLevel([id]);
     if (!frontier.length) return;
+    track('explore: their connections');
     const token = ++exploreToken;
     nextUp = null;
     exploringChildrenOf = id;
@@ -658,6 +661,7 @@ async function boot() {
 
   /** The panel's "Show connections": this artist's own connections only, then the usual offer. */
   async function expandOne(id: string) {
+    track('explore: show connections');
     const token = ++exploreToken;
     activity.clear('deep');
     if (!expanded.has(id)) activity.set('load', `Loading ${nodeById.get(id)?.label ?? 'artist'}…`);
@@ -745,6 +749,7 @@ async function boot() {
 
   function exploreOneMoreLevel() {
     if (!nextUp) return;
+    track('explore: one more level');
     const { id, frontier, level, base } = nextUp;
     nextUp = null;
     const token = exploreToken;
@@ -1400,6 +1405,7 @@ async function boot() {
   });
 
   async function connectArtists(a: SearchItem, b: SearchItem) {
+    track(`connect: ${a.label} → ${b.label}`);
     connectMenu.open = false;
     if (connectSearch) connectSearch.cancelled = true;
     const signal = (connectSearch = { cancelled: false });
