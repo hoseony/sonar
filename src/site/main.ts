@@ -24,17 +24,37 @@ const status = $<HTMLDivElement>('status');
 const searchInput = $<HTMLInputElement>('search');
 
 /** Starting points on the welcome screen (from the original hand-made vault). */
-const SUGGESTIONS: { id: string; label: string; kind: 'group' | 'person' }[] = [
-  { id: 'e0953daa-860f-4dc8-9f1a-b12587cdaf17', label: 'Tortoise', kind: 'group' },
-  { id: '5193ce6b-a315-4c50-ae49-54e69ffbc988', label: 'Soft Machine', kind: 'group' },
-  { id: 'd0f25f16-7782-42e8-8047-c16a1cb2b450', label: 'Fishmans', kind: 'group' },
-  { id: '4dfadf48-e15b-4fc2-a800-2b68702a72d5', label: 'Penguin Cafe Orchestra', kind: 'group' },
-  { id: '13501c7d-d181-45ba-af52-5f101d8516a0', label: 'Can', kind: 'group' },
-  { id: '2869c510-2679-4a3f-bf15-e5e8b49f2f28', label: 'Slint', kind: 'group' },
-  { id: 'f1df0431-9250-4ec8-95d8-f19ce7cf7fb6', label: 'Stereolab', kind: 'group' },
-  { id: '5a54b72e-bfb3-4ca6-944a-e17261399965', label: 'Pere Ubu', kind: 'group' },
-  { id: 'd5da1841-9bc8-4813-9f89-11098090148e', label: 'The Fall', kind: 'group' },
+type Starter = { id: string; label: string; kind: 'group' | 'person' };
+const g = (id: string, label: string): Starter => ({ id, label, kind: 'group' });
+const p = (id: string, label: string): Starter => ({ id, label, kind: 'person' });
+
+/**
+ * Welcome-screen suggestions, grouped by scene. Each visit shows one random artist from every
+ * shelf, in random order: different every time, but always a spread of scenes. All of them are
+ * well connected in the index; giant hubs (Miles Davis…) are left out so the first map stays calm.
+ */
+const SHELVES: Starter[][] = [
+  [g('e0953daa-860f-4dc8-9f1a-b12587cdaf17', 'Tortoise'), g('2869c510-2679-4a3f-bf15-e5e8b49f2f28', 'Slint'), g('3648db01-b29d-4ab9-835c-83f6a5068fe4', 'Godspeed You! Black Emperor'), g('a74f43e4-50c4-4b19-a2ce-c05ce9bccb03', 'Talk Talk'), g('d700b3f5-45af-4d02-95ed-57d301bda93e', 'Mogwai'), g('74171cb6-1ff8-42bd-be8a-96660c22e3e0', 'The Sea and Cake')],
+  [g('13501c7d-d181-45ba-af52-5f101d8516a0', 'Can'), g('adec1fc3-83c1-48f7-9e49-8347ac6d40b0', 'Neu!'), g('0568e321-d42b-4da4-a025-2643c9fc13dd', 'Faust'), g('393ce5ee-4550-48e2-97f9-50a47a74bdc1', 'Cluster'), g('1aa7dcb0-9c9b-4609-a7a5-bdeee26e39e8', 'Harmonia'), g('9d78c6da-a415-4e1d-a55d-5e37b3bbc65d', 'Amon Düül II')],
+  [g('5193ce6b-a315-4c50-ae49-54e69ffbc988', 'Soft Machine'), g('6ba2f6ce-50be-47df-b5a3-298ef032f476', 'Henry Cow'), p('9f041c61-f382-4048-a1f1-33105124bb99', 'Robert Wyatt'), g('18283e97-41ed-40fb-8458-574ae420e405', 'Hatfield and the North'), g('5927990e-34bb-493f-b5da-b7b28d43698f', 'Gong'), g('b38225b8-8e5f-42aa-bcdc-7bae5b5bdab3', 'King Crimson')],
+  [g('d5da1841-9bc8-4813-9f89-11098090148e', 'The Fall'), g('5a54b72e-bfb3-4ca6-944a-e17261399965', 'Pere Ubu'), g('7f2a8098-50e3-451c-8696-c5d9f64f4762', 'Wire'), g('9a58fda3-f4ed-4080-a3a5-f457aac9fcdd', 'Joy Division'), g('a94a7155-c79d-4409-9fcf-220cb0e4dc3a', 'Talking Heads'), g('8e538a69-fc3b-43e1-9a6b-801ea56d6d48', 'This Heat'), g('42201355-08b7-43b6-a7b8-866f612e1600', 'The Raincoats')],
+  [g('d0f25f16-7782-42e8-8047-c16a1cb2b450', 'Fishmans'), g('ac5af671-1df0-4312-8b7b-e61992ecc883', 'Yellow Magic Orchestra'), g('4bd19b19-4ef4-42e0-ac5c-a21f709d248b', 'Happy End'), p('fc3ae4dd-dcc5-4f99-a865-6bc1a5c9b705', 'Ichiko Aoba'), g('0798d15b-64e2-499f-9969-70167b1d8617', 'Boredoms'), p('df765d93-621c-437f-99fe-fda9e135f89a', 'Cornelius'), g('ae6c9840-240d-4f53-a56a-b5ff3da19550', 'Yura Yura Teikoku'), g('252c9f8a-be04-4146-b73e-a24696b2f5ed', 'Quruli')],
+  [p('c27cac8e-4c4a-48c0-a4ba-41399b9c176d', 'Sun Ra'), g('0f9997bd-e079-429e-8ccd-9378c9b0c746', 'Weather Report'), g('ed7156ee-07da-484b-b5a5-be322afa1a34', 'Art Ensemble of Chicago'), p('d24fc285-7b2f-47da-8ac5-4070b08570b1', 'Alice Coltrane')],
+  [g('f1df0431-9250-4ec8-95d8-f19ce7cf7fb6', 'Stereolab'), g('aaae25bf-c794-45d7-bab7-cdc7c655bfa6', 'Broadcast'), g('5cbef01b-cc35-4f52-af7b-d0df0c4f61b9', 'Sonic Youth'), g('8ca01f46-53ac-4af2-8516-55a909c0905e', 'My Bloody Valentine'), g('94b0fb9d-a066-4823-b2ec-af1d324bcfcf', 'The Velvet Underground'), g('a74b1b7f-71a5-4011-9441-d0b5e4122711', 'Radiohead'), g('36bfa85f-737b-41db-a8fc-b8825850ffc3', 'Pavement')],
+  [g('4dfadf48-e15b-4fc2-a800-2b68702a72d5', 'Penguin Cafe Orchestra'), p('ff95eb47-41c4-4f7f-a104-cdc30f02e872', 'Brian Eno'), g('69158f97-4c07-4c4e-baf8-4e4ab1ed666e', 'Boards of Canada'), p('f43370e3-6d86-44e7-ae4c-ca098962dcd0', 'Arthur Russell'), p('86809b51-cbe2-45f1-804a-e66eed635dea', 'Laurie Anderson'), g('5700dcd4-c139-4f31-aa3e-6382b9af9032', 'Kraftwerk')],
+  [p('6514cffa-fbe0-4965-ad88-e998ead8a82a', 'Fela Kuti'), g('a3212186-5da5-4e84-a935-6952b3e14921', 'Os Mutantes'), p('f07dbc2f-317b-470f-bad4-5f1b0eb6faf1', 'Caetano Veloso'), g('5c98fc12-be83-4246-ae5b-2184192913b9', 'Tinariwen'), p('9be2a5ac-8201-489b-b5f6-91f958bf9060', 'Ali Farka Touré')],
 ];
+
+const pickOne = <T,>(list: T[]) => list[Math.floor(Math.random() * list.length)];
+/** One artist per shelf, shuffled. */
+function pickStarters(): Starter[] {
+  const picks = SHELVES.map(pickOne);
+  for (let i = picks.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [picks[i], picks[j]] = [picks[j], picks[i]];
+  }
+  return picks;
+}
 
 // ---------- Theme ----------
 
@@ -181,16 +201,20 @@ async function boot() {
 
   // ---------- Welcome screen ----------
 
+  // A different handful each visit (see SHELVES); ↻ deals a new one.
+  const starterChips = h('div', { class: 'chips' });
+  const dealStarters = () =>
+    starterChips.replaceChildren(
+      ...pickStarters().map((s) =>
+        h('button', { type: 'button', class: 'chip', onclick: () => void openArtist(s) }, h('span', { class: `dot ${s.kind}` }), s.label),
+      ),
+      h('button', { type: 'button', class: 'chip shuffle', title: 'Show other artists', 'aria-label': 'Show other artists', onclick: dealStarters }, '↻'),
+    );
+  dealStarters();
   status.replaceChildren(
     h('h1', null, 'Who played with whom?'),
     h('p', { class: 'muted' }, 'Search any artist to map their bands, members and collaborators, and keep exploring outward.'),
-    h(
-      'div',
-      { class: 'chips' },
-      SUGGESTIONS.map((s) =>
-        h('button', { type: 'button', class: 'chip', onclick: () => void openArtist(s) }, h('span', { class: `dot ${s.kind}` }), s.label),
-      ),
-    ),
+    starterChips,
     h(
       'p',
       { class: 'muted keys' },

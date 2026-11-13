@@ -47,7 +47,7 @@ jobs:
 
       - name: Restore connection index
         id: index-cache
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v5
         with:
           path: public/index
           # Bump the version when the index format or builder changes (src/shared/index-format.ts).
@@ -77,7 +77,7 @@ jobs:
 
       - name: Save connection index
         if: steps.index-cache.outputs.cache-hit != 'true'
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@v5
         with:
           path: public/index
           key: index-v5-${{ steps.dump.outputs.name }}-${{ steps.dump.outputs.links }}
@@ -86,7 +86,7 @@ jobs:
         env:
           # Project sites live at https://<user>.github.io/<repo>/
           BASE_PATH: /${{ github.event.repository.name }}/
-      - uses: actions/upload-pages-artifact@v4
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: dist
 
@@ -98,4 +98,4 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
