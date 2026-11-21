@@ -67,7 +67,7 @@ export const TUNING = {
 
 /**
  * Past this many nodes the simulation gets cheaper: no collision pass (~30% of a tick), a coarser
- * far-field estimate, and a quicker settle. At 15k nodes a full-quality tick took ~100 ms.
+ * far-field estimate. At 15k nodes a full-quality tick took ~100 ms.
  */
 export const BIG_MAP = 2500;
 
@@ -284,7 +284,8 @@ export class Physics {
       // Always last, so it caps the combined result of every other force.
       .force('limit', null)
       .force('limit', speedLimit());
-    this.sim.alphaDecay(big ? TUNING.alphaDecay * 2 : TUNING.alphaDecay);
+    // Same cooling on big maps: settling faster made the map freeze mid-layout.
+    this.sim.alphaDecay(TUNING.alphaDecay);
     this.dirty = true;
     if (heat) {
       this.releasePins(); // a slider change should affect the whole map
