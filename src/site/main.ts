@@ -13,7 +13,7 @@ import { loadPrefs, mountLayoutControls } from './layout-controls.ts';
 import { connectionCount, fetchAlbums, fetchConnections, indexStats, prefetch, searchArtists } from './live.ts';
 import { renderPanel, type PanelContext } from './panel.ts';
 import { findPath, type PathResult } from './path.ts';
-import { Physics } from './physics.ts';
+import { BIG_MAP, Physics } from './physics.ts';
 import { attachSearch, type SearchIndex, type SearchItem } from './search.ts';
 import { track } from './stats.ts';
 
@@ -278,7 +278,8 @@ async function boot() {
       }
       return;
     }
-    const center = state.selected ?? state.hovered;
+    // On a big map, hovering doesn't light up a neighbourhood: that's a full redraw (~0.3 s at 15k).
+    const center = state.selected ?? (graph.order > BIG_MAP ? null : state.hovered);
     if (!center || !graph.hasNode(center)) {
       focusNodes = focusEdges = null;
       return;
@@ -669,9 +670,9 @@ async function boot() {
     nextUp = null;
     exploringChildrenOf = id;
     if (state.selected === id) rerenderPanel(); // the button goes away while it runs
-    const finished = await exploreLevel(frontier, 0, token);
+    const rest = await exploreLevel(frontier, 0, token);
     if (exploringChildrenOf === id) exploringChildrenOf = null;
-    if (!finished) return;
+    if (!rest) return;
     activity.clear('deep');
     if (state.selected === id) {
       rerenderPanel();
@@ -679,6 +680,7 @@ async function boot() {
     }
     flushNow();
     physics.onceAtRest(() => token === exploreToken && physics.lockIslands());
+    if (rest.length) return offerNextLevel(id, rest, 0, frontier);
     const next = nextLevel(frontier);
     if (next.length) offerNextLevel(id, next, 0);
   }
@@ -730,6 +732,8 @@ async function boot() {
    * huge circle once the map has this many artists. "Explore one more level" adds one more per click.
    */
   const AUTO_GROWTH_ARTISTS = 1500;
+  /** Most artists one "Explore one more level" click adds; the rest waits for the next click. */
+  const STEP_ARTISTS = 3000;
   /** The next level waiting to be explored (shown as the button in the pill). */
   /** `base`: the whole level when `frontier` is only its unexplored rest (the next level grows from all of it). */
   let nextUp: { id: string; frontier: string[]; level: number; base?: string[] } | null = null;
@@ -737,14 +741,24 @@ async function boot() {
   const artistsOnMap = () => graph.filterNodes((n) => nodeById.get(n)?.kind !== 'album').length;
 
   /** Looks up everyone in one level. Returns false if you moved on to another artist meanwhile. */
-  async function exploreLevel(frontier: string[], level: number, token: number): Promise<boolean> {
-    void prefetch(frontier);
+  /**
+   * Looks up everyone in one level, but adds at most STEP_ARTISTS artists per run: one click once
+   * took the map from 836 to 14,835 artists, where nothing moves smoothly. Returns null if you moved
+   * on meanwhile, else whoever is still left to look up (empty when the level is done).
+   */
+  async function exploreLevel(frontier: string[], level: number, token: number): Promise<string[] | null> {
+    void prefetch(frontier.slice(0, 200));
+    const limit = artistsOnMap() + STEP_ARTISTS;
     let sliceStart = performance.now();
     for (let i = 0; i < frontier.length; i++) {
-      if (token !== exploreToken) return false;
+      if (token !== exploreToken) return null;
+      if (i % 8 === 0) {
+        if (artistsOnMap() >= limit) return frontier.slice(i);
+        if (i % 200 === 0 && i) void prefetch(frontier.slice(i, i + 200));
+      }
       await expand(frontier[i], { indexOnly: true, skipHuge: true });
       // You may have moved on while that lookup ran: then don't touch the pill (it's someone else's now).
-      if (token !== exploreToken) return false;
+      if (token !== exploreToken) return null;
       // Work in ~16 ms slices (about a frame), then let the browser draw: fast, and the map stays smooth.
       if (performance.now() - sliceStart > 16) {
         await new Promise((r) => requestAnimationFrame(r));
@@ -759,14 +773,15 @@ async function boot() {
         );
       }
     }
-    return token === exploreToken;
+    return token === exploreToken ? [] : null;
   }
 
-  /** Pauses at a level boundary and offers the next level as a button. */
+  /** Pauses at a level boundary and offers the next level as a button. `base`: see nextUp. */
   function offerNextLevel(id: string, frontier: string[], level: number, base?: string[]) {
     nextUp = { id, frontier, level, base };
     activity.set('deep', `${artistsOnMap().toLocaleString()} artists on the map`, undefined, undefined, {
-      label: `Explore one more level (+${frontier.length.toLocaleString()})`,
+      // `base` set = the same level, paused at the step limit: say "keep going", not "one more level".
+      label: base ? `Keep exploring (+${frontier.length.toLocaleString()} to look up)` : `Explore one more level (+${frontier.length.toLocaleString()})`,
       onClick: exploreOneMoreLevel,
     });
   }
@@ -778,7 +793,10 @@ async function boot() {
     nextUp = null;
     const token = exploreToken;
     void (async () => {
-      if (!(await exploreLevel(frontier, level, token))) return;
+      const rest = await exploreLevel(frontier, level, token);
+      if (!rest) return;
+      // Paused at the step limit: the rest of this level is the next click.
+      if (rest.length) return offerNextLevel(id, rest, level, base ?? frontier);
       if (!state.selected) return offerMapLevel(); // nothing selected: keep offering the whole map
       const next = nextLevel(base ?? frontier);
       if (next.length) offerNextLevel(id, next, level + 1);
@@ -1322,13 +1340,19 @@ async function boot() {
 
   function setHovered(node: string | null) {
     if (node === state.hovered) return;
+    const before = state.hovered;
     state.hovered = node;
     container.style.cursor = node ? 'pointer' : '';
     if (node) {
       fillChip(node);
       if (!chipFrame) chipFrame = requestAnimationFrame(followChip);
     } else chip.hidden = true;
-    refresh();
+    // Small map: the hovered artist's neighbourhood lights up (full redraw). Big map: only the two
+    // dots whose look changed are redrawn.
+    if (graph.order > BIG_MAP && !state.path) {
+      const changed = [before, node].filter((n): n is string => !!n && graph.hasNode(n));
+      if (changed.length) renderer.refresh({ partialGraph: { nodes: changed }, skipIndexation: true });
+    } else refresh();
   }
 
   function nearestNode(): string | null {

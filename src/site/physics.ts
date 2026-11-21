@@ -65,6 +65,12 @@ export const TUNING = {
   glideFrames: 42,
 };
 
+/**
+ * Past this many nodes the simulation gets cheaper: no collision pass (~30% of a tick), a coarser
+ * far-field estimate, and a quicker settle. At 15k nodes a full-quality tick took ~100 ms.
+ */
+export const BIG_MAP = 2500;
+
 /** Fastest a node may move per tick (px). Stops explosions and jitter in crowded spots. */
 const MAX_SPEED = 10;
 
@@ -89,6 +95,8 @@ function speedLimit() {
 }
 
 export class Physics {
+  /** Whether the forces are in their cheaper big-map settings (see BIG_MAP). */
+  private bigMode = false;
   private sim = forceSimulation<SimNode, SimLink>([])
     .stop() // we drive ticks ourselves from requestAnimationFrame
     .velocityDecay(0.55) // damping: higher = calmer, less overshoot
@@ -160,6 +168,8 @@ export class Physics {
       fresh.add(id);
       this.dirty = true;
     });
+    // Crossing BIG_MAP switches the forces to (or from) their cheaper settings.
+    if ((this.nodes.size > BIG_MAP) !== this.bigMode) this.applyPrefs(false);
     if (hadNodes && fresh.size) {
       if (wasResting && !this.arrivalPins.size) this.calmRelease = true;
       // Nodes near the newcomers stay free to make room; everything farther away is held.
@@ -227,6 +237,8 @@ export class Physics {
   /** Re-reads the force sliders and wakes the simulation so the change is visible. */
   applyPrefs(heat = false) {
     const p = this.prefs;
+    const big = this.nodes.size > BIG_MAP;
+    this.bigMode = big;
     // Forces are rebuilt below and immediately look up nodes by id: give the simulation the
     // current node list first (newcomers may not be attached yet).
     this.sim.nodes([...this.nodes.values()]);
@@ -258,21 +270,21 @@ export class Physics {
             if (deg >= 3 && TUNING.hubRepel > 0) k *= Math.min(4, 1 + TUNING.hubRepel * (Math.sqrt(deg) - 1));
             return -p.repel * k;
           })
-          .theta(0.8) // accuracy of the far-field approximation (lower = steadier)
+          .theta(big ? 1.1 : 0.8) // accuracy of the far-field approximation (lower = steadier, slower)
           .distanceMax(Math.max(150, p.linkDistance * TUNING.repelReach)), // far-away clusters don't push each other forever
       )
       .force('x', forceX<SimNode>((d) => this.anchorOf(d.id)?.x ?? 0).strength((d) => this.pullOf(d.id)))
       .force('y', forceY<SimNode>((d) => this.anchorOf(d.id)?.y ?? 0).strength((d) => this.pullOf(d.id)))
       .force(
         'collide',
-        p.noOverlap
+        p.noOverlap && !big
           ? forceCollide<SimNode>((d) => ((this.graph.getNodeAttribute(d.id, 'size') as number) ?? 4) + 3).strength(0.7)
           : null,
       )
       // Always last, so it caps the combined result of every other force.
       .force('limit', null)
       .force('limit', speedLimit());
-    this.sim.alphaDecay(TUNING.alphaDecay);
+    this.sim.alphaDecay(big ? TUNING.alphaDecay * 2 : TUNING.alphaDecay);
     this.dirty = true;
     if (heat) {
       this.releasePins(); // a slider change should affect the whole map
